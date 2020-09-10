@@ -1,0 +1,82 @@
+body {
+	font-family: GT America;
+	background-color: black;
+	color: white;
+	height: 100%;
+	width: 100%;
+}
+
+html {
+	height: 100%;
+}
+
+h1, h2, h3 {
+	/*font-family: GT America Condensed;*/
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+hr {
+	border: none;
+    height: 2px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: white;
+}
+
+.btn-primary {
+	background-color: #ef404d;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+#mapid { 
+	height: 65%; 
+}
+
+#aclum-logo {
+	display: block;
+	width: auto;
+  	height: auto;
+	min-width: 20%;
+	max-height: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1rem;
+}
+
+#footer {
+	margin-top: 1rem;
+}
+
+.take-action-btn {
+    border-radius: 0px;
+    font-size: 1.5rem;
+}
+
+#sidebar {
+    background-color: white;
+    box-shadow: 0 0 black;
+    padding: 1rem;
+    color: black;
+    border: 10px solid #d74d51;
+    border-radius: 0px;
+}
+
+.leaflet-sidebar .close {
+	z-index: 1000;
+}
+
+.leaflet-container {
+	font-family: GT America;
+}
+
+.fas, .fab {
+	font-family: 'Font Awesome\ 5 Free';
+}

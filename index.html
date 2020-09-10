@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Police Misconduct: It Happens Here - ACLU of Massachusetts</title>
+    <!-- Import Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <!-- Load leaflet-sidebar -->
+    <link rel="stylesheet" href="packages/leaflet-sidebar/L.Control.Sidebar.css" />
+    <script src="packages/leaflet-sidebar/L.Control.Sidebar.js"></script>
+    <!-- Load Leaflet Awesome Markers -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js" integrity="sha512-8BqQ2RH4L4sQhV41ZB24fUc1nGcjmrTA6DILV/aTPYuUzo+wBdYdp0fvQ76Sxgf36p787CXF7TktWlcxu/zyOg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" integrity="sha512-cUoWMYmv4H9TGP4hbm1mIjYo90WzIQFo/5jj+P5tQcDTf+iVR59RyIj/a9fRsBxzxt5Dnv/Ex7MzRIxcDwaOLw==" crossorigin="anonymous" />
+    <!-- Load ESRI Leaflet -->
+    <script src="https://unpkg.com/esri-leaflet@2.5.0/dist/esri-leaflet.js" integrity="sha512-ucw7Grpc+iEQZa711gcjgMBnmd9qju1CICsRaryvX7HJklK0pGl/prxKvtHwpgm5ZHdvAil7YPxI1oWPOWK3UQ==" crossorigin=""></script>
+    <!-- Load shapefile-js -->
+	<script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>    
+	<!-- Load leaflet.shapefile -->
+	<script src="packages/leaflet.shpfile.js"></script>
+	<!-- Load leaflet-ajax -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js" integrity="sha512-Abr21JO2YqcJ03XGZRPuZSWKBhJpUAR6+2wH5zBeO4wAw4oksr8PRdF+BKIRsxvCdq+Mv4670rZ+dLnIyabbGw==" crossorigin="anonymous"></script>
+    <!-- Load Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- Load PapaParse -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js" integrity="sha512-rKFvwjvE4liWPlFnvH4ZhRDfNZ9FOpdkD/BU5gAIA3VS3vOQrQ5BjKgbO3kxebKhHdHcNUHLqxQYSoxee9UwgA==" crossorigin="anonymous"></script>
+    <!-- Load FontAwesome -->
+    <script src="https://kit.fontawesome.com/7fb5d02cd4.js" crossorigin="anonymous"></script>
+    <!-- Load custom CSS -->
+    <link rel="stylesheet" href="it-happens-here.css" />
+</head>
+
+<body>
+	<!-- Header with title -->
+    <h1>Police Misconduct: It Happens Here</h1>
+    <hr>
+    <img id="aclum-logo" src="img/OneLineLogo_White_CYMK_Massachusetts.png">
+
+    <!-- Sidebar with incident details -->
+    <div id="sidebar">
+        <h2 id="victim-name">leaflet-sidebar</h2>
+        <p><i id="victim-demographics"></i></p>
+        <p>
+	        <div><b>Date of Incident:</b> <span id="incident-date"></span></div>
+	        <div><b>Location:</b> <span id="city"></span></div>
+	        <div><b>Police Department:</b> <span id="police-dept"></span></div>
+	        <div><b>Officer(s) Involved:</b> <span id="officers"></span></div>
+	        <div>
+	        	<b>Held Accountable?</b>
+	        	<span id="accountability">
+		        	<i id="accountability-icon"></i>
+		        	<span id="accountability-word"></span>
+	        	</span>	
+	        </div>
+    	</p>
+        <p id="incident-description"></p>
+        
+        <i>Source: <a id="news-source" target="_blank"></a></i>
+
+    </div>
+
+    <!-- Map -->
+    <div id="mapid"></div>
+
+    <!-- Footer with button -->
+    <div id="footer">
+        <button type="button" class="btn btn-primary take-action-btn">TAKE ACTION</button>
+    </div>
+</body>
+
+<script type='text/javascript' src='apikey.js'></script>
+<script type='text/javascript' src='it-happens-here.js'></script>
+<script type='text/javascript' src='leaflet-gsheets.js'></script>
+<script type='text/javascript' src='load-db.js'></script>
+
+</html>
