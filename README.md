@@ -8,4 +8,5 @@
 - leaflet-sidebar
 - leaflet.shapefile
 - Font Awesome
+- Leaflet.EasyButton
 - leaflet-control-window

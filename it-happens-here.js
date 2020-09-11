@@ -31,6 +31,11 @@ ma_polygon.once("data:loaded", function() {
     map.fitBounds(ma_polygon.getBounds());
 })
 
+// Add button to reset zoom
+L.easyButton('fa-home', function(btn, map){
+    map.fitBounds(ma_polygon.getBounds());
+}).addTo(map);
+
 var sidebar = L.control.sidebar('sidebar', {
     closeButton: true,
     position: 'right'
