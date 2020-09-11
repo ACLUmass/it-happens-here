@@ -27,6 +27,7 @@ function init() {
             console.log("data downloaded?");
             console.log(data);
             addPoints(data);
+            win.hide();
           }
     });
 }

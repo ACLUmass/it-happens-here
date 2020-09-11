@@ -77,6 +77,19 @@ hr {
 	font-family: GT America;
 }
 
-.fas, .fab {
-	font-family: 'Font Awesome\ 5 Free';
+.spin-window {
+	box-shadow: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.spin-window .titlebar,
+.spin-window .promptButtons {
+	display: none;
+}
+
+.spin-window .spinner-border{
+	width: 100px;
+    height: 100px;
+    border-width: 5px;
 }

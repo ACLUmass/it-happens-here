@@ -8,3 +8,4 @@
 - leaflet-sidebar
 - leaflet.shapefile
 - Font Awesome
+- leaflet-control-window
