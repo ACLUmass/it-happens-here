@@ -40,3 +40,29 @@ var sidebar = L.control.sidebar('sidebar', {
     position: 'right'
 });
 map.addControl(sidebar);
+
+// Add custom control for timeline
+function addBranding(map) {
+	L.Control.Watermark = L.Control.extend({
+	    onAdd: function(map) {
+	        var img = L.DomUtil.create('img');
+
+	        img.src = 'img/black_logo.png';
+	        img.style.width = '100px';
+
+	        return img;
+	    },
+
+	    onRemove: function(map) {
+	        // Nothing to do here
+	    }
+	});
+
+	L.control.watermark = function(opts) {
+	    return new L.Control.Watermark(opts);
+	}
+
+	L.control.watermark({ position: 'topright' }).addTo(map);
+}
+
+addBranding(map);
