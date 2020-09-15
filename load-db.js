@@ -15,10 +15,10 @@ fetch(url)
 	.then(response => response.json())
 	.then(json_result => Papa.parse(Papa.unparse(json_result.values), { header: true }))
 	.then(data => {
-		var data = data.data;
-            addPoints(data);
-        addDates(data);
-            win.hide();
+  		var data = data.data;
+      addPoints(data);
+      addDates(data);
+      win.hide();
     });
 
 /*
@@ -59,7 +59,7 @@ function addPoints(data) {
       });
     } else {
       marker = L.marker([data[row].Latitude, data[row].Longitude]);
-          }
+    }
     marker.addTo(pointGroupLayer);
 
     let demographics = data[row].VictimAge + "-year-old " + data[row].VictimRace
@@ -120,4 +120,3 @@ function addPoints(data) {
   }
 }
 
-init();
