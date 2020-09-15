@@ -1,6 +1,4 @@
-// var gsheets_url = "https://docs.google.com/spreadsheets/d/1WgKitw1ggr9VO9Wg_K50G7t4L-uP_dr3vi7drUcPPbU/edit?usp=sharing"
-// var gsheets_url = "https://docs.google.com/spreadsheets/d/1WgKitw1ggr9VO9Wg_K50G7t4L-uP_dr3vi7drUcPPbU/pub?output=csv"
-
+// Define credentials to access Google Sheets database
 let SHEET_ID = '1WgKitw1ggr9VO9Wg_K50G7t4L-uP_dr3vi7drUcPPbU'; // Get this from the main sheet URL (not the copied Publish URL with '2PACX' in it).
 let API_KEY = google_sheets_api_key;
 
