@@ -17,7 +17,7 @@ fetch(url)
 	.then(data => {
   		var data = data.data;
       addPoints(data);
-      addDates(data);
+      // addDates(data);
       win.hide();
     });
 
