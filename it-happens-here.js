@@ -11,7 +11,7 @@ var win =  L.control.window(map,
 	 content:'<div class="spinner-border text-dark" role="status"><span class="sr-only"></span></div>',
 	 className: "spin-window"})
            .showOn([map.getSize().x / 2 - 50, 
-           	map.getSize().y / 2 - 50])
+           			map.getSize().y / 2 - 50])
 
 // Add polygon of MA to the map
 var MAStyle = {
@@ -66,3 +66,5 @@ function addBranding(map) {
 }
 
 addBranding(map);
+
+addTimeline(map);

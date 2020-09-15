@@ -121,3 +121,35 @@ function addPoints(data) {
 }
 
 init();
+  // console.log("pointGroupLayer", pointGroupLayer)
+
+ //  var sliderControl = L.control.sliderControl({
+	//     // position: "bottom",
+	//     layer: pointGroupLayer
+	//     // timeAttribute: 'DATE_START'
+	// });
+
+ //  console.log(sliderControl)
+
+	// //Make sure to add the slider to the map ;-)
+	// map.addControl(sliderControl);
+
+	// //And initialize the slider
+	// sliderControl.startSlider();
+
+
+function addDates(data){
+	console.log(data);
+
+	var dates = [];
+	for (let row = 0; row < data.length; row++) {
+		var parts = data[row].IncidentDate_Num.split('-');
+		var mydate = new Date(parts[0], parts[1] - 1, parts[2]); 
+		console.log(data[row].IncidentDate_Num, mydate.toDateString());
+		// console.log(data[row].IncidentDate_Num, Date(data[row].IncidentDate_Num))
+		dates.push(mydate);
+	}
+
+	console.log(dates)
+}
+

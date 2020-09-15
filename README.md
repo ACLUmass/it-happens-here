@@ -10,3 +10,4 @@
 - Font Awesome
 - Leaflet.EasyButton
 - leaflet-control-window
+- LeafletSlider
