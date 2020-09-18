@@ -48,6 +48,8 @@
 
     <!-- Sidebar with incident details -->
     <div id="sidebar">
+        <div id="sidebar-killing">
+            <h2 class="type-heading" id="violence-heading" style="color: rgba(239, 64, 78, 0.3);">KILLING</h2>
         <h2 id="victim-name">leaflet-sidebar</h2>
         <p><i id="victim-demographics"></i></p>
         <p>
@@ -66,7 +68,14 @@
         <p id="incident-description"></p>
         
         <i>Source: <a id="news-source" target="_blank"></a></i>
+        </div>
 
+        <div id="sidebar-misconduct">
+            <h2 class="type-heading" style="color: rgba(0, 85, 170, 0.3);">MISCONDUCT</h2>
+            <h2 id="misconduct-dept"></h2>
+            <p><i id="n-misconduct"></i></p>
+            <div id="misconduct-entries"></div>
+        </div>
     </div>
 
     <!-- Map -->
@@ -81,6 +90,7 @@
 <script type='text/javascript' src='apikey.js'></script>
 <!-- <script type='text/javascript' src='timeline.js'></script> -->
 <script type='text/javascript' src='it-happens-here.js'></script>
-<script type='text/javascript' src='load-db.js'></script>
+<script type='text/javascript' src='load-incident-db.js'></script>
+<script type='text/javascript' src='load-misconduct-db.js'></script>
 
 </html>

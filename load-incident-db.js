@@ -29,13 +29,6 @@ function addPoints(data) {
   // data = data.data;
   let pointGroupLayer = L.layerGroup().addTo(map);
 
-  // Choose marker type. Options are:
-  // (these are case-sensitive, defaults to marker!)
-  // marker: standard point with an icon
-  // circleMarker: a circle with a radius set in pixels
-  // circle: a circle with a radius set in meters
-  let markerType = "circleMarker";
-
   // Marker radius
   // Wil be in pixels for circleMarker, metres for circle
   // Ignore for point
@@ -43,23 +36,14 @@ function addPoints(data) {
 
   for (let row = 0; row < data.length; row++) {
     // var victim_name = data[row].VictimName;
-    console.log("Lat:", data[row].Latitude, "Long:", data[row].Longitude);
-    let marker;
-    if (markerType == "circleMarker") {
-      marker = L.circleMarker([data[row].Latitude, data[row].Longitude], {
+    // console.log("Lat:", data[row].Latitude, "Long:", data[row].Longitude);
+    let marker = L.circleMarker([data[row].Latitude, data[row].Longitude], {
         radius: markerRadius, 
         stroke: false,
         fillOpacity: 0.6,
         color: "#ef404d",
         time: data[row].IncidentDate
       });
-    } else if (markerType == "circle") {
-      marker = L.circle([data[row].Latitude, data[row].Longitude], {
-        radius: markerRadius,
-      });
-    } else {
-      marker = L.marker([data[row].Latitude, data[row].Longitude]);
-    }
     marker.addTo(pointGroupLayer);
 
     let demographics = data[row].VictimAge + "-year-old " + data[row].VictimRace
@@ -92,6 +76,12 @@ function addPoints(data) {
     }
 
     marker.on('click', function () {
+      $("#sidebar-killing")[0].style.display = "block";
+      $("#sidebar-misconduct")[0].style.display = "none";
+
+      $("#sidebar")[0].style.border = "10px solid #d74d51";
+
+      document.getElementById("violence-heading").innerHTML = data[row].IncidentType;
       document.getElementById("victim-name").innerHTML = data[row].VictimName;
       document.getElementById("victim-demographics").innerHTML = demographics;
       document.getElementById("incident-date").innerHTML = data[row].IncidentDate;
@@ -105,18 +95,6 @@ function addPoints(data) {
       sidebar.show(); 
       
     });
-
-    // AwesomeMarkers is used to create fancier icons
-    let icon = L.AwesomeMarkers.icon({
-      icon: "info-circle",
-      iconColor: "white",
-      markerColor: "blue",
-      prefix: "fa",
-      extraClasses: "fa-rotate-0",
-    });
-    if (!markerType.includes("circle")) {
-      marker.setIcon(icon);
-    }
   }
 }
 

@@ -65,4 +65,4 @@ function addBranding(map) {
 	L.control.watermark({ position: 'topright' }).addTo(map);
 }
 
-addBranding(map);
+// addBranding(map);
