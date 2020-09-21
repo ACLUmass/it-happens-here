@@ -164,11 +164,13 @@ function addMisconductPoints(data) {
         var city_title = "MA State Police";
       } else if (city.includes("Sheriff")) {
         var city_title = city
-      } else {
+      } else if (city.includes("Various")) {
+        var city_title = "Statewide"
+      }else {
         var city_title = city + " PD";
       }
       document.getElementById("misconduct-dept").innerHTML = city_title;
-      document.getElementById("n-misconduct").innerHTML = i_entry + " known incident(s) of misconduct";
+      document.getElementById("n-misconduct").innerHTML = i_entry + " collected incident(s) of misconduct";
       document.getElementById("misconduct-entries").replaceWith(misconduct_div);
 
       // Define URL for marker and customize "Copy URL" button

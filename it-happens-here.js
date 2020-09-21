@@ -39,7 +39,7 @@ var info_win =  L.control.window(map,
 	{closeButton: true,
 		title: "Police Violence Happens Here",
 	 content: `
-	 	 <p><em>A campaign by the ACLU of Massachusetts</em></p>
+	 	 <p><em>A campaign by the <a href="aclum.org" target="_blank">ACLU of Massachusetts</a></em></p>
 
 	 	 <p>Massachusetts is not immune to police violence and misconduct - and we must demand change. Right now, legislators in Massachusetts have the unprecedented opportunity to end qualified immunity, impose real restrictions on use of force, and ban police use of face surveillance technology. Police violence happens here: help us demand an end to it in Massachusetts.</p>
     
