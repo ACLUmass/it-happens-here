@@ -1,5 +1,33 @@
+/* GT America Condensed Regular */
+@font-face {
+  font-family:'gtamcond';
+  src: url("fonts/gtamerica/GT-America-Condensed-Regular.woff2") format('woff2');
+  font-weight:400;
+}
+
+/* GT America Condensed Bold */
+@font-face {
+  font-family:'gtamcond';
+  src: url("fonts/gtamerica/GT-America-Condensed-Bold.woff2") format('woff2');
+  font-weight:600;
+}
+
+/* GT America Regular */
+@font-face {
+  font-family:'gtam';
+  src: url("fonts/gtamerica/GT-America-Standard-Regular.woff2") format('woff2');
+  font-weight:400;
+}
+
+/* GT America Bold */
+@font-face {
+  font-family:'gtam';
+  src: url("fonts/gtamerica/GT-America-Standard-Bold.woff2") format('woff2');
+  font-weight:600;
+}
+
 body {
-	font-family: GT America;
+	font-family: gtam;
 	background-color: black;
 	color: white;
 	height: 100%;
@@ -30,7 +58,7 @@ hr {
 }
 
 #mapid { 
-	height: 65%; 
+	height: 100%; 
 }
 
 #aclum-logo {
@@ -54,7 +82,22 @@ hr {
 	margin-right: auto;
 	display: block;
     border-radius: 0px;
-    font-size: 1.5rem;
+    font-weight: 700;
+    margin-right: -3px;
+    display: inline-block;
+    color: white !important;	
+}
+
+.submit-incident-btn {
+	background-color: #a3dbe3;
+	border-color: #a3dbe3;
+	color: #0055aa !important;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+    border-radius: 0px;
+    font-weight: 700;
+    display: inline-block;
 }
 
 #sidebar {
@@ -71,17 +114,25 @@ hr {
 }
 
 .leaflet-container {
-	font-family: GT America;
+	font-family: gtam;
 }
 
 .spin-window {
 	box-shadow: none;
     margin: 0px;
     padding: 0px;
+    /*overflow: hidden;*/
+}
+
+.spin-window .content {
+	overflow: hidden;
 }
 
 .spin-window .titlebar,
-.spin-window .promptButtons {
+.spin-window .promptButtons,
+.intro-window .titlebar,
+.info-window .promptButtons
+ {
 	display: none;
 }
 
@@ -89,6 +140,51 @@ hr {
 	width: 100px;
     height: 100px;
     border-width: 5px;
+}
+
+.intro-window {
+	background-color: #0055aa;
+    /*padding: 1rem;*/
+}
+
+.intro-window .promptButtons {
+	text-align: center;
+	padding: 0px;
+}
+
+.intro-window button {
+	opacity: 1;
+}
+
+.intro-window .content {
+	padding: 0px;
+}
+
+#ihh-logo {
+	width: 100%;
+}
+
+#intro-description {
+	margin: 1rem 3rem 0 3rem;
+}
+
+.info-window {
+	background-color: white;
+	color: black;
+}
+
+.info-window .close {
+	background-color: rgba(0, 0, 0, 0);
+    color: white;
+}
+
+.info-window .titlebar {
+	background-color: #0055aa;
+    color: white;
+}
+
+.info-window .content {
+	padding: 1rem;
 }
 
 #sidebar-misconduct ol {
@@ -117,7 +213,7 @@ hr {
 
 .read-more {
     font-style: italic;
-    font-family: GT America;
+    font-family: gtam;
     font-weight: 500;
     font-size: .8rem;
     margin-left: 5px;
@@ -132,4 +228,27 @@ hr {
 .collapse {
 	margin-bottom: 1rem;
 }
+
+.take-action {
+    padding: 0px;
+    box-shadow: 0 0 3px hsla(0,0%,59%,.5);
+}
+
+.btn-social{
+	border-radius: 0px;
+    width: 48%;
+    font-size: .9rem;
+    color: white !important;
+}
+
+.social {
+	margin-top: 1rem;
+}
+
+.social .btn-info {
+	background-color: #00acee;
+	border-color: #00acee;
+}
+
+.social .btn-dark 
 

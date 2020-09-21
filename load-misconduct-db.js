@@ -1,22 +1,32 @@
 // Load Google Sheet (draw from credentials defined in load-incident-db.js)
+let SHEET_ID = '1WgKitw1ggr9VO9Wg_K50G7t4L-uP_dr3vi7drUcPPbU'; // Get this from the main sheet URL (not the copied Publish URL with '2PACX' in it).
+let API_KEY = google_sheets_api_key;
+var spreadsheetId = SHEET_ID
+var sheetName = 'Incidents'
+var apiKey = API_KEY
+var url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${sheetName}?key=${apiKey}`;
+
 var sheetName_misconduct = 'Misconduct'
 var url_misconduct = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${sheetName_misconduct}?key=${apiKey}`;
 
-fetch(url_misconduct)
-	.then(response => response.json())
-	.then(json_result => Papa.parse(Papa.unparse(json_result.values), { header: true }))
-	.then(data => {
-  		var data = data.data;
-      console.log(data);
-      addMisconductPoints(data);
-      win.hide();
-    });
+function load_misconduct_data() {
+  return fetch(url_misconduct)
+  	.then(response => response.json())
+  	.then(json_result => Papa.parse(Papa.unparse(json_result.values), { header: true }))
+  	.then(data => {
+    		var data = data.data;
+        console.log(data);
+        addMisconductPoints(data);
+      });
+  }
 
 /*
 Add points from google sheet to Leaflet map
 Thank you, https://github.com/carderne/leaflet-gsheets/blob/master/main.js
 */
 function addMisconductPoints(data) {
+
+  console.log("markers within addMisconductPoints", markers)
   // data = data.data;
   let pointGroupLayer = L.layerGroup().addTo(map);
 
@@ -45,6 +55,11 @@ function addMisconductPoints(data) {
     // Skip any entries that don't have lat/lng
     if (typeof lat == "undefined" | typeof lng == "undefined") {
       continue
+    }
+
+    if (typeof description == "undefined") {
+      console.log("description", description, typeof description == "undefined")
+      description = "<em>No details available.</em>"
     }
 
     // Add City, Lat, Lng to set of PD locations
@@ -90,7 +105,9 @@ function addMisconductPoints(data) {
       city: city
     });
     marker.addTo(pointGroupLayer);
-    // marker.on('click', function () {});
+
+    let marker_id = city.toLowerCase();
+    markers[marker_id] = marker;
 
     // Construct div with all misconduct incident-description
     let city_misconduct_cases = PD_misconduct_cases[city];
@@ -98,7 +115,7 @@ function addMisconductPoints(data) {
     let misconduct_div = document.createElement("div"); 
     misconduct_div.id = "misconduct-entries";
 
-    console.log(city_misconduct_cases)
+    let city_no_spaces = city.replace(/\s/g, '-') 
 
     let i_entry = 0;
 
@@ -113,8 +130,8 @@ function addMisconductPoints(data) {
 
         let misconduct_entry = document.createElement("div"); 
         misconduct_entry.innerHTML = `
-          <button class="btn btn-light misconduct-btn" id="collapseButton${city}${i_entry}" 
-             data-toggle="collapse" data-target="#collapse${city}${i_entry}" 
+          <button class="btn btn-light misconduct-btn" id="collapseButton${city_no_spaces}${i_entry}" 
+             data-toggle="collapse" data-target="#collapse${city_no_spaces}${i_entry}" 
              type="button" aria-expanded="false" aria-controls="collapseExample">
             ${city_misconduct_cases[type][entry].tagline}
             <div style="text-align: right;">
@@ -123,34 +140,18 @@ function addMisconductPoints(data) {
             </div> 
           </button>
 
-          <div class="collapse" id="collapse${city}${i_entry}">
+          <div class="collapse" id="collapse${city_no_spaces}${i_entry}">
             ${city_misconduct_cases[type][entry].description}
-            <div><i>Source: <a id="news-source" target="_blank" href=${city_misconduct_cases[type][entry].source_url}>
+            <i>Source: <a id="news-source" target="_blank" href=${city_misconduct_cases[type][entry].source_url}>
               ${city_misconduct_cases[type][entry].source_name}
-            </a></i></div>   
+            </a></i>  
           </div>
         `
-        city_entries.push(city + i_entry);
-        // misconduct_entry.innerHTML = city_misconduct_cases[type][entry].tagline;
-        // misconduct_entry.value=i_entry;
-
+        city_entries.push(city_no_spaces + i_entry);
 
         misconduct_div.appendChild(misconduct_entry);
-
-        
       }
-
-      // misconduct_div.appendChild(misconduct_type_list);
-
     }
-
-    console.log(city_entries)
-
-    console.log(misconduct_div)
-
-    // document.getElementById("misconduct-entries").replaceWith(misconduct_div)
-    // misconduct_div.appendAfter(document.getElementById("misconduct-entries"))
-    // document.getElementById("misconduct-entries").appendChild(misconduct_div)
 
     marker.on('click', function () {
 
@@ -159,15 +160,25 @@ function addMisconductPoints(data) {
 
       $("#sidebar")[0].style.border = "10px solid #0055aa";
 
-      document.getElementById("misconduct-dept").innerHTML = city + " PD";
+      if (city == "Statewide") {
+        var city_title = "MA State Police";
+      } else if (city.includes("Sheriff")) {
+        var city_title = city
+      } else {
+        var city_title = city + " PD";
+      }
+      document.getElementById("misconduct-dept").innerHTML = city_title;
       document.getElementById("n-misconduct").innerHTML = i_entry + " known incident(s) of misconduct";
       document.getElementById("misconduct-entries").replaceWith(misconduct_div);
 
+      // Define URL for marker and customize "Copy URL" button
+      let marker_url = base_url + "?id=" + marker_id;
+      document.getElementById("url-copy-misconduct").onclick = copy_to_clipboard(marker_url);
 
       // Re-add the call to toggle the bootstrap collapse when the button is clicked
       for (i_cityentry in city_entries) {
 
-        if (city_entries[i_cityentry].includes(this.options.city)) {
+        if (city_entries[i_cityentry].includes(this.options.city.replace(/\s/g, '-'))) {
 
           let city_entry_id = city_entries[i_cityentry]
           let button_id = "collapseButton" + city_entry_id;
@@ -185,13 +196,18 @@ function addMisconductPoints(data) {
       }
     }
 
-      sidebar.show(); 
+      sidebar.show();
+
+      // Disable scroll zooming to not mess up scrolling inside sidebar
+      map.scrollWheelZoom.disable();
       
     });
 
     
 
   }
+
+  console.log("markers at the end of addMisconductPoints", markers)
 
 }
 

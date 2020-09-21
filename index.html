@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Police Misconduct: It Happens Here - ACLU of Massachusetts</title>
+    <title>Police Violence Happens Here - ACLU of Massachusetts</title>
     <!-- Import Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <!-- Make sure you put this AFTER Leaflet's CSS -->
@@ -41,10 +41,6 @@
 </head>
 
 <body>
-	<!-- Header with title -->
-    <h1>Police Misconduct: It Happens Here</h1>
-    <hr>
-    <img id="aclum-logo" src="img/OneLineLogo_White_CYMK_Massachusetts.png">
 
     <!-- Sidebar with incident details -->
     <div id="sidebar">
@@ -68,6 +64,18 @@
         <p id="incident-description"></p>
         
         <i>Source: <a id="news-source" target="_blank"></a></i>
+
+            <div class="social">
+                <a href="#" class="btn btn-info btn-social" role="button" aria-disabled="true">
+                    <i class="fab fa-twitter"></i>
+                    Tweet
+                </a>
+                <a href="#" id="url-copy-incident" class="btn btn-dark btn-social" role="button" aria-disabled="true">
+                    <i class="fas fa-link"></i>
+                    Copy URL
+                </a>
+            </div> 
+
         </div>
 
         <div id="sidebar-misconduct">
@@ -75,22 +83,29 @@
             <h2 id="misconduct-dept"></h2>
             <p><i id="n-misconduct"></i></p>
             <div id="misconduct-entries"></div>
+
+            <div class="social">
+                <a href="#" class="btn btn-info btn-social" role="button" aria-disabled="true">
+                    <i class="fab fa-twitter"></i>
+                    Tweet
+                </a>
+                <a href="#" id="url-copy-misconduct" class="btn btn-dark btn-social" role="button" aria-disabled="true">
+                    <i class="fas fa-link"></i>
+                    Copy URL
+                </a>
+            </div> 
         </div>
     </div>
 
     <!-- Map -->
     <div id="mapid"></div>
 
-    <!-- Footer with button -->
-    <div id="footer">
-        <button type="button" class="btn btn-danger take-action-btn">TAKE ACTION</button>
-    </div>
 </body>
 
 <script type='text/javascript' src='apikey.js'></script>
-<!-- <script type='text/javascript' src='timeline.js'></script> -->
 <script type='text/javascript' src='it-happens-here.js'></script>
-<script type='text/javascript' src='load-incident-db.js'></script>
+
 <script type='text/javascript' src='load-misconduct-db.js'></script>
+<script type='text/javascript' src='load-incident-db.js'></script>
 
 </html>

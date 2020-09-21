@@ -1,6 +1,6 @@
 // Define credentials to access Google Sheets database
-let SHEET_ID = '1WgKitw1ggr9VO9Wg_K50G7t4L-uP_dr3vi7drUcPPbU'; // Get this from the main sheet URL (not the copied Publish URL with '2PACX' in it).
-let API_KEY = google_sheets_api_key;
+// let SHEET_ID = '1WgKitw1ggr9VO9Wg_K50G7t4L-uP_dr3vi7drUcPPbU'; // Get this from the main sheet URL (not the copied Publish URL with '2PACX' in it).
+// let API_KEY = google_sheets_api_key;
 
 /*
 Use Google Sheets API to download spreadshet as JSON, and Papa.parse to format
@@ -11,14 +11,17 @@ var sheetName = 'Incidents'
 var apiKey = API_KEY
 var url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${sheetName}?key=${apiKey}`;
 
+var markers = {};
 fetch(url)
 	.then(response => response.json())
 	.then(json_result => Papa.parse(Papa.unparse(json_result.values), { header: true }))
-	.then(data => {
-  		var data = data.data;
-      addPoints(data);
+	.then(data => addPoints(data.data))
+  .then(() => load_misconduct_data())
+  .then(() => {
       // addDates(data);
-      win.hide();
+      loading_win.hide();
+      // intro_win.show();
+      handle_URL();
     });
 
 /*
@@ -35,8 +38,6 @@ function addPoints(data) {
   let markerRadius = 5;
 
   for (let row = 0; row < data.length; row++) {
-    // var victim_name = data[row].VictimName;
-    // console.log("Lat:", data[row].Latitude, "Long:", data[row].Longitude);
     let marker = L.circleMarker([data[row].Latitude, data[row].Longitude], {
         radius: markerRadius, 
         stroke: false,
@@ -46,33 +47,29 @@ function addPoints(data) {
       });
     marker.addTo(pointGroupLayer);
 
-    let demographics = data[row].VictimAge + "-year-old " + data[row].VictimRace
+    let marker_id = data[row].VictimName.replace(/\s/g, '-').toLowerCase()  + '-' + data[row].IncidentDate_Num
+    markers[marker_id] = marker;
 
-    if (data[row].VictimGender == "M" & data[row].VictimAge >= 18) {
+    if (data[row].VictimRace == "White") {
+      var race = "white";
+    } else if (data[row].VictimRace == "Unknown") {
+      var race = "";
+    } else {
+      var race = data[row].VictimRace;
+    }
+
+    let demographics = data[row].VictimAge + "-year-old " + race
+
+    if (data[row].VictimGender == "Male" & data[row].VictimAge >= 18) {
       demographics += " man"
-    } else if (data[row].VictimGender == "M" & data[row].VictimAge < 18) {
+    } else if (data[row].VictimGender == "Male" & data[row].VictimAge < 18) {
       demographics += " boy"
-    } else if (data[row].VictimGender == "F" & data[row].VictimAge >= 18) {
+    } else if (data[row].VictimGender == "Female" & data[row].VictimAge >= 18) {
       demographics += " woman"
-    } else if (data[row].VictimGender == "F" & data[row].VictimAge < 18) {
+    } else if (data[row].VictimGender == "Female" & data[row].VictimAge < 18) {
       demographics += " girl"
     } else {
       demographics += " person"
-    }
-
-    let accountability;
-    if (data[row].Accountability == "N") {
-      document.getElementById("accountability-icon").className = "fas fa-times-circle";
-      document.getElementById("accountability").style.color = "red";
-      document.getElementById("accountability-word").innerHTML = "No";
-    } else if (data[row].Accountability == "Y") {
-      document.getElementById("accountability-icon").className = "fas fa-check-circle";
-      document.getElementById("accountability").style.color = "green";
-      document.getElementById("accountability-word").innerHTML = "Yes";
-    } else {
-      document.getElementById("accountability-icon").className = "fas fa-question-circle";
-      document.getElementById("accountability").style.color = "goldenrod";
-      document.getElementById("accountability-word").innerHTML = "Unknown";
     }
 
     marker.on('click', function () {
@@ -92,7 +89,29 @@ function addPoints(data) {
       document.getElementById("news-source").innerHTML = data[row].ArticleSource;
       document.getElementById("news-source").href = data[row].ArticleURL;
 
+      // Define URL for marker and customize "Copy URL" button
+      let marker_url = base_url + "?id=" + marker_id;
+      document.getElementById("url-copy-incident").onclick = copy_to_clipboard(marker_url);
+
+      console.log("Consequence", data[row].Consequence)
+      if (data[row].Consequence == "No Consequence") {
+        document.getElementById("accountability-icon").className = "fas fa-times-circle";
+        document.getElementById("accountability").style.color = "red";
+        document.getElementById("accountability-word").innerHTML = "No";
+      } else if (data[row].Consequence == "Unknown") {
+        document.getElementById("accountability-icon").className = "fas fa-question-circle";
+        document.getElementById("accountability").style.color = "goldenrod";
+        document.getElementById("accountability-word").innerHTML = "Unknown";
+      } else {
+        document.getElementById("accountability-icon").className = "";
+        document.getElementById("accountability").style.color = "black";
+        document.getElementById("accountability-word").innerHTML = data[row].Consequence;
+      }
+
       sidebar.show(); 
+
+      // Disable scroll zooming to not mess up scrolling inside sidebar
+      map.scrollWheelZoom.disable();
       
     });
   }
