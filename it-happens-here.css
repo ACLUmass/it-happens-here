@@ -171,6 +171,8 @@ hr {
 .info-window {
 	background-color: white;
 	color: black;
+	max-width: 800px !important;
+    width: 80%;
 }
 
 .info-window .close {
