@@ -169,7 +169,7 @@ hr {
 }
 
 .info-window {
-	background-color: white;
+	background-color: #c8e4e8;
 	color: black;
 	max-width: 800px !important;
     width: 80%;
@@ -187,6 +187,11 @@ hr {
 
 .info-window .content {
 	padding: 1rem;
+}
+
+.info-window a {
+	color: #0055aa;
+    font-weight: 700;
 }
 
 #sidebar-misconduct ol {

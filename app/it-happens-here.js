@@ -60,7 +60,7 @@ var info_win =  L.control.window(map,
 
 	 	 <p>Interested programmers can view the source code for this map, written in Javascript, on <a href="https://github.com/ACLUmass/it-happens-here" target="_blank">GitHub</a>.</p>
     
-	 	 Please contact *** with questions.
+	 	 Please contact <a href="mailto:lchambers@aclum.org">lchambers@aclum.org</a> with questions, or <a href="mailto:klagreca@aclum.org">klagreca@aclum.org</a> with media inquiries.
 	 	 `,
 	 className: "info-window",
 	 position: "top-left"}
@@ -228,4 +228,11 @@ function copy_to_clipboard(id) {
   // alert("Copied the text: " + copyText.value);
 }
 
+// function create_tweet(type, name, url) {
+// 	if (type = "violence") {
+// 		tweet_language = "Massachusetts is not immune to police violence and misconduct. We must demand change. #ItHappensHere".replace(/\s/g, '%20')
+// 	}
+
+// 	url_to_tweet = `http://twitter.com/intent/tweet?text=${tweet_language}%3A&url=http%3A%2F%2F${url}%2F&via=ACLU_Mass`
+// }
 

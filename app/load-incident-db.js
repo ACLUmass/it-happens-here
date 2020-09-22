@@ -93,20 +93,20 @@ function addPoints(data) {
       let marker_url = base_url + "?id=" + marker_id;
       document.getElementById("url-copy-incident").onclick = copy_to_clipboard(marker_url);
 
-      console.log("Consequence", data[row].Consequence)
-      if (data[row].Consequence == "No Consequence") {
-        document.getElementById("accountability-icon").className = "fas fa-times-circle";
-        document.getElementById("accountability").style.color = "red";
-        document.getElementById("accountability-word").innerHTML = "No";
-      } else if (data[row].Consequence == "Unknown") {
-        document.getElementById("accountability-icon").className = "fas fa-question-circle";
-        document.getElementById("accountability").style.color = "goldenrod";
-        document.getElementById("accountability-word").innerHTML = "Unknown";
-      } else {
-        document.getElementById("accountability-icon").className = "";
-        document.getElementById("accountability").style.color = "black";
-        document.getElementById("accountability-word").innerHTML = data[row].Consequence;
-      }
+      // console.log("Consequence", data[row].Consequence)
+      // if (data[row].Consequence == "No Consequence") {
+      //   document.getElementById("accountability-icon").className = "fas fa-times-circle";
+      //   document.getElementById("accountability").style.color = "red";
+      //   document.getElementById("accountability-word").innerHTML = "No";
+      // } else if (data[row].Consequence.toLowerCase() == "unknown") {
+      //   document.getElementById("accountability-icon").className = "fas fa-question-circle";
+      //   document.getElementById("accountability").style.color = "goldenrod";
+      //   document.getElementById("accountability-word").innerHTML = "Unknown";
+      // } else {
+      //   document.getElementById("accountability-icon").className = "";
+      //   document.getElementById("accountability").style.color = "black";
+      //   document.getElementById("accountability-word").innerHTML = data[row].Consequence;
+      // }
 
       sidebar.show(); 
 
