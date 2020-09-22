@@ -26,7 +26,8 @@ var intro_win =  L.control.window(map,
 	     <p id="intro-description">
 	     	This map shows incidents of alleged police violence (red dots) and alleged misconduct 
 	     	(blue dots) that occurred in Massachusetts since 2000. Descriptions are drawn 
-	     	from contemporaneous sources. This is not an exhaustive list.
+	     	from contemporaneous sources. This is not an exhaustive list, and locations 
+	     	are not meant to be exact.
      	</p>`,
 	 className: "intro-window",
 	 position: "top-left",
@@ -41,11 +42,13 @@ var info_win =  L.control.window(map,
 	{closeButton: true,
 		title: "Police Violence Happens Here",
 	 content: `
-	 	 <p><em>A campaign by the <a href="aclum.org" target="_blank">ACLU of Massachusetts</a></em></p>
+	 	 <p><em>An initiative by the <a href="aclum.org" target="_blank">ACLU of Massachusetts</a></em></p>
 
 	 	 <p>Massachusetts is not immune to police violence and misconduct - and we must demand change. Right now, legislators in Massachusetts have the unprecedented opportunity to end qualified immunity, impose real restrictions on use of force, and ban police use of face surveillance technology. Police violence happens here: help us demand an end to it in Massachusetts.</p>
     
-    <p> To take action against police violence and misconduct across Massachusetts, visit the homepage for our <a href="https://www.aclum.org/en/police-violence-happens-here-week-action" target="_blank">Week of Action</a>.</p>
+    <p> To <a href="https://action.aclu.org/send-message/tell-massachusetts-lawmakers-pass-strong-police-reform-bill?ms_aff=MA&initms_aff=MA&ms=200923_MAP_&initms=200923_MAP_&ms_chan=ptp&initms_chan=ptp">
+    take action</a> 
+    against police violence and misconduct across Massachusetts, visit the homepage for our <a href="https://www.aclum.org/en/police-violence-happens-here-week-action" target="_blank">Week of Action</a>.</p>
     <p style="margin-bottom: 0px;">To learn more about policing in Massachusetts and nationally, we invite you to explore the following projects and organizations:</p>
     <ul>
         <li><a href="http://masspolicereform.org/" target="_blank">Mass Police Reform</a></li>
@@ -53,12 +56,14 @@ var info_win =  L.control.window(map,
         <li><a href="https://mappingpoliceviolence.org/" target="_blank">Mapping Police Violence</a></li>
     </ul>
     
-    <p>Please note that this map is by no means a comprehensive list of all 
-	 	 incidents of police violence and misconduct in Massachusetts. Incidents reported here reflect only those reported publicly in the past two decades which ACLU-MA volunteers were able to compile over the course of a week. If you know of an 
-	 	 incident that was documented in secondary sources but is not listed on our
-	 	 map, we invite you to 
+    <p>This map is a resource for the press, activists, and the public. Far from exhaustive, 
+    it draws from media reports to mark select incidents of police brutality and misconduct 
+    across the state. Many incidents of police misconduct are never reported; what 
+    appears on this map likely just scratches the surface of the problem. If you would like to 
+    offer comments and suggestions to further populate the map with 
+    incidents of police violence and misconduct, we invite you to 
 	 	 <a href="https://docs.google.com/forms/d/e/1FAIpQLScmhMIsDd_Ap2GqHHYe6BfBO87D_qIMQ-3n8YJbkUzEdEHjqw/formResponse" target="_blank">
-	 	 let us know</a>.</p>
+	 	 submit an incident</a>.</p>
 
 	 	 <p>Interested programmers can view the source code for this map, written in Javascript, on <a href="https://github.com/ACLUmass/it-happens-here" target="_blank">GitHub</a>.</p>
     
@@ -142,7 +147,8 @@ function addActions(map) {
 	        div.classList.add("take-action");
 
 	        div.innerHTML = `
-	        <a href="#" 
+	        <a href="https://action.aclu.org/send-message/tell-massachusetts-lawmakers-pass-strong-police-reform-bill?ms_aff=MA&initms_aff=MA&ms=200923_MAP_&initms=200923_MAP_&ms_chan=ptp&initms_chan=ptp"
+	        target="_blank" 
 	           class="btn btn-danger take-action-btn" 
 	        	role="button" aria-disabled="true">
                     Take Action
