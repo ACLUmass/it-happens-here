@@ -43,6 +43,7 @@ function addMisconductPoints(data) {
 
   for (let row = 0; row < data.length; row++) {
     let city = data[row].City;
+    let dvsv_flag = data[row].DVSV;
     let misconduct_type = data[row].Type;
     let lat = data[row].Latitude;
     let lng = data[row].Longitude;
@@ -63,7 +64,7 @@ function addMisconductPoints(data) {
     }
 
     // Add City, Lat, Lng to set of PD locations
-    PD_locations.push([city, lat, lng])
+    PD_locations.push([city, dvsv_flag, lat, lng])
 
     // Collect information needed for each misconduct entry
     let entry = {
@@ -74,16 +75,18 @@ function addMisconductPoints(data) {
       source_url: source_url
     };
 
+    let city_flag_key = city + "-" + dvsv_flag.replace(/\s/g, '-').toLowerCase()
+
     // Populate object (dict) with eachs entry, organized by city and type
-    if (Object.keys(PD_misconduct_cases).includes(city)) {
-      if (Object.keys(PD_misconduct_cases[city]).includes(misconduct_type)) {
-        PD_misconduct_cases[city][misconduct_type].push(entry);
+    if (Object.keys(PD_misconduct_cases).includes(city_flag_key)) {
+      if (Object.keys(PD_misconduct_cases[city_flag_key]).includes(misconduct_type)) {
+        PD_misconduct_cases[city_flag_key][misconduct_type].push(entry);
       } else {
-        PD_misconduct_cases[city][misconduct_type] = [entry];
+        PD_misconduct_cases[city_flag_key][misconduct_type] = [entry];
       }
     } else {
-      PD_misconduct_cases[city] = {};
-      PD_misconduct_cases[city][misconduct_type] = [entry];
+      PD_misconduct_cases[city_flag_key] = {};
+      PD_misconduct_cases[city_flag_key][misconduct_type] = [entry];
     }
   }
 
@@ -94,23 +97,33 @@ function addMisconductPoints(data) {
   // Add one marker to map per PD
   for (let item of PD_locations_set) {
     let city = item[0];
-    let lat = item[1];
-    let lng = item[2];
+    let dvsv_flag = item[1];
+    let lat = item[2];
+    let lng = item[3];
+
+    if (dvsv_flag == "Sexual Violence") {
+      var misconduct_color = "#d74d51"
+    } else {
+      var misconduct_color = "#0055aa"
+    }
 
     let marker = L.circleMarker([lat, lng], {
       radius: markerRadius, 
       stroke: false,
       fillOpacity: 0.6,
-      color: "#0055aa",
-      city: city
+      color: misconduct_color,
+      city: city,
+      dvsv_flag: dvsv_flag
     });
     marker.addTo(pointGroupLayer);
 
     let marker_id = city.toLowerCase();
     markers[marker_id] = marker;
 
+    let city_flag_key = city + "-" + dvsv_flag.replace(/\s/g, '-').toLowerCase()
+
     // Construct div with all misconduct incident-description
-    let city_misconduct_cases = PD_misconduct_cases[city];
+    let city_misconduct_cases = PD_misconduct_cases[city_flag_key];
 
     let misconduct_div = document.createElement("div"); 
     misconduct_div.id = "misconduct-entries";
@@ -155,10 +168,27 @@ function addMisconductPoints(data) {
 
     marker.on('click', function () {
 
+      if (this.options.dvsv_flag == "Sexual Violence") {
+        var misconduct_color = "#d74d51"
+        var watermark_color = "rgba(239, 64, 78, 0.3)"
+        var watermark = "ALLEGED VIOLENCE"
+        var suffix = " incident(s) of alleged violence"
+      } else {
+        var misconduct_color = "#0055aa"
+        var watermark_color = "rgba(0, 85, 170, 0.3)"
+        var watermark = "ALLEGED MISCONDUCT"
+        var suffix = " incident(s) of alleged misconduct";
+      }
+
       $("#sidebar-killing")[0].style.display = "none";
       $("#sidebar-misconduct")[0].style.display = "block";
 
-      $("#sidebar")[0].style.border = "10px solid #0055aa";
+      $("#sidebar")[0].style.border = `10px solid ${misconduct_color}`;
+
+      console.log($("#misconduct-heading"))
+
+      $("#misconduct-heading")[0].innerHTML = watermark;
+      $("#misconduct-heading")[0].style.color = watermark_color;
 
       if (city == "Statewide") {
         var city_title = "MA State Police";
@@ -170,7 +200,7 @@ function addMisconductPoints(data) {
         var city_title = city + " PD";
       }
       document.getElementById("misconduct-dept").innerHTML = city_title;
-      document.getElementById("n-misconduct").innerHTML = i_entry + " incident(s) of alleged misconduct";
+      document.getElementById("n-misconduct").innerHTML = i_entry + suffix;
       document.getElementById("misconduct-entries").replaceWith(misconduct_div);
 
       // Define URL for marker and customize "Copy URL" button

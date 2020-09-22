@@ -50,6 +50,12 @@ function addPoints(data) {
     let marker_id = data[row].VictimName.replace(/\s/g, '-').toLowerCase()  + '-' + data[row].IncidentDate_Num
     markers[marker_id] = marker;
 
+    marker.on('click', function () {
+      $("#sidebar-killing")[0].style.display = "block";
+      $("#sidebar-misconduct")[0].style.display = "none";
+
+      $("#sidebar")[0].style.border = "10px solid #d74d51";
+
     if (data[row].VictimRace == "White") {
       var race = "white";
     } else if (data[row].VictimRace == "Unknown") {

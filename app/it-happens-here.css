@@ -204,6 +204,7 @@ hr {
     top: .5rem;
 	transform: rotate(90deg);
 	transform-origin: 0 0;
+	white-space: nowrap;
 }
 
 .misconduct-btn {
