@@ -23,9 +23,11 @@ var intro_win =  L.control.window(map,
 	{closeButton: false,
 	 content: `
 	 	 <img id="ihh-logo" src="img/ihh_logo.png" alt="Police Violence Happens Here">
-	     <p id="intro-description">Here goes a great sentence from someone in Comms about what this map shows.
-	     Include disclaimer about how this is not a complete collection, and that it 
-	     includes incidents of misconduct.</p>`,
+	     <p id="intro-description">
+	     	This map shows incidents of police violence and misconduct that occurred in 
+	     	Massachusetts since 2000. Descriptions are drawn from contemporaneous sources. 
+	     	This is not an exhaustive list.
+     	</p>`,
 	 className: "intro-window",
 	 position: "top-left",
 	 prompt: {buttonOK: "Continue", 
@@ -52,7 +54,7 @@ var info_win =  L.control.window(map,
     </ul>
     
     <p>Please note that this map is by no means a comprehensive list of all 
-	 	 incidents of police violence and misconduct in Massachusetts. Incidents reported here reflect only those reported publicly in the past ten years which ACLU-MA volunteers were able to compile over the course of a week. If you know of an 
+	 	 incidents of police violence and misconduct in Massachusetts. Incidents reported here reflect only those reported publicly in the past two decades which ACLU-MA volunteers were able to compile over the course of a week. If you know of an 
 	 	 incident that was documented in secondary sources but is not listed on our
 	 	 map, we invite you to 
 	 	 <a href="https://docs.google.com/forms/d/e/1FAIpQLScmhMIsDd_Ap2GqHHYe6BfBO87D_qIMQ-3n8YJbkUzEdEHjqw/formResponse" target="_blank">
