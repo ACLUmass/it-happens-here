@@ -56,33 +56,36 @@ function addPoints(data) {
 
       $("#sidebar")[0].style.border = "10px solid #d74d51";
 
-    if (data[row].VictimRace == "White") {
-      var race = "white";
-    } else if (data[row].VictimRace == "Unknown") {
-      var race = "";
-    } else {
-      var race = data[row].VictimRace;
-    }
+      if (data[row].VictimRace == "White") {
+        var race = "white";
+      } else if (data[row].VictimRace == "Unknown") {
+        var race = "";
+      } else {
+        var race = data[row].VictimRace;
+      }
 
-    let demographics = data[row].VictimAge + "-year-old " + race
+      if (data[row].VictimGender == "Male" & data[row].VictimAge >= 18) {
+        gender = " man"
+      } else if (data[row].VictimGender == "Male" & data[row].VictimAge < 18) {
+         gender = " boy"
+      } else if (data[row].VictimGender == "Female" & data[row].VictimAge >= 18) {
+         gender = " woman"
+      } else if (data[row].VictimGender == "Female" & data[row].VictimAge < 18) {
+        gender = " girl"
+      } else {
+        gender = " person"
+      }
 
-    if (data[row].VictimGender == "Male" & data[row].VictimAge >= 18) {
-      demographics += " man"
-    } else if (data[row].VictimGender == "Male" & data[row].VictimAge < 18) {
-      demographics += " boy"
-    } else if (data[row].VictimGender == "Female" & data[row].VictimAge >= 18) {
-      demographics += " woman"
-    } else if (data[row].VictimGender == "Female" & data[row].VictimAge < 18) {
-      demographics += " girl"
-    } else {
-      demographics += " person"
-    }
+      console.log(data[row].VictimAge.toLowerCase().trim(), data[row].VictimAge.toLowerCase().trim() == "unknown")
 
-    marker.on('click', function () {
-      $("#sidebar-killing")[0].style.display = "block";
-      $("#sidebar-misconduct")[0].style.display = "none";
 
-      $("#sidebar")[0].style.border = "10px solid #d74d51";
+      if (data[row].VictimAge.toLowerCase().trim() == "unknown") {
+        var demographics = race + gender + " of unknown age"   
+        demographics = demographics.trim()     
+        demographics = demographics.charAt(0).toUpperCase() + demographics.slice(1);
+      } else {
+        var demographics = data[row].VictimAge + "-year-old " + race + gender
+      }
 
       document.getElementById("violence-heading").innerHTML = data[row].IncidentType;
       document.getElementById("victim-name").innerHTML = data[row].VictimName;
