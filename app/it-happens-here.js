@@ -24,9 +24,9 @@ var intro_win =  L.control.window(map,
 	 content: `
 	 	 <img id="ihh-logo" src="img/ihh_logo.png" alt="Police Violence Happens Here">
 	     <p id="intro-description">
-	     	This map shows incidents of police violence and misconduct that occurred in 
-	     	Massachusetts since 2000. Descriptions are drawn from contemporaneous sources. 
-	     	This is not an exhaustive list.
+	     	This map shows incidents of alleged police violence (red dots) and alleged misconduct 
+	     	(blue dots) that occurred in Massachusetts since 2000. Descriptions are drawn 
+	     	from contemporaneous sources. This is not an exhaustive list.
      	</p>`,
 	 className: "intro-window",
 	 position: "top-left",

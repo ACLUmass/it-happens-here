@@ -1,2 +1,6 @@
 apikey.js
 test.html
+*.docx
+*.xls*
+*.ipynb
+**.uuid

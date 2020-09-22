@@ -170,7 +170,7 @@ function addMisconductPoints(data) {
         var city_title = city + " PD";
       }
       document.getElementById("misconduct-dept").innerHTML = city_title;
-      document.getElementById("n-misconduct").innerHTML = i_entry + " collected incident(s) of misconduct";
+      document.getElementById("n-misconduct").innerHTML = i_entry + " incident(s) of alleged misconduct";
       document.getElementById("misconduct-entries").replaceWith(misconduct_div);
 
       // Define URL for marker and customize "Copy URL" button
