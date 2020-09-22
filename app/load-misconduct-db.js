@@ -117,7 +117,7 @@ function addMisconductPoints(data) {
     });
     marker.addTo(pointGroupLayer);
 
-    let marker_id = city.toLowerCase();
+    let marker_id = city.toLowerCase().replace(/\s/g, '-');
     markers[marker_id] = marker;
 
     let city_flag_key = city + "-" + dvsv_flag.replace(/\s/g, '-').toLowerCase()
@@ -168,16 +168,19 @@ function addMisconductPoints(data) {
 
     marker.on('click', function () {
 
+      let tweet_type
       if (this.options.dvsv_flag == "Sexual Violence") {
         var misconduct_color = "#d74d51"
         var watermark_color = "rgba(239, 64, 78, 0.3)"
         var watermark = "ALLEGED VIOLENCE"
         var suffix = " incident(s) of alleged violence"
+        tweet_type = "violence"
       } else {
         var misconduct_color = "#0055aa"
         var watermark_color = "rgba(0, 85, 170, 0.3)"
         var watermark = "ALLEGED MISCONDUCT"
         var suffix = " incident(s) of alleged misconduct";
+        tweet_type = "misconduct"
       }
 
       $("#sidebar-killing")[0].style.display = "none";
@@ -206,6 +209,19 @@ function addMisconductPoints(data) {
       // Define URL for marker and customize "Copy URL" button
       let marker_url = base_url + "?id=" + marker_id;
       document.getElementById("url-copy-misconduct").onclick = copy_to_clipboard(marker_url);
+
+      let city_to_tweet;
+      if (city == "Statewide") {
+        city_to_tweet = "statewide"
+      } else if (city.includes("Sheriff")) {
+        city_to_tweet = "at the " + city
+      } else if (city.includes("Various")) {
+        city_to_tweet = "statewide"
+      } else {
+        city_to_tweet = "in " + city
+      }
+
+      document.getElementById("url-tweet-incident").href = create_tweet(tweet_type, "", city_to_tweet, marker_url)
 
       // Re-add the call to toggle the bootstrap collapse when the button is clicked
       for (i_cityentry in city_entries) {

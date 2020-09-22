@@ -102,6 +102,15 @@ function addPoints(data) {
       let marker_url = base_url + "?id=" + marker_id;
       document.getElementById("url-copy-incident").onclick = copy_to_clipboard(marker_url);
 
+      let tweet_type
+      if (data[row].IncidentType.toLowerCase() == "death") {
+        tweet_type = "death"
+      } else {
+        tweet_type = "violence"
+      }
+
+      document.getElementById("url-tweet-incident").href = create_tweet(tweet_type, data[row].VictimName, data[row].City, marker_url)
+
       // console.log("Consequence", data[row].Consequence)
       // if (data[row].Consequence == "No Consequence") {
       //   document.getElementById("accountability-icon").className = "fas fa-times-circle";

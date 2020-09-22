@@ -1,4 +1,4 @@
-const base_url = "0.0.0.0:8000"
+const base_url = "data.aclum.org/it-happens-here"
 
 // Initialize Leaflet map
 var map = L.map('mapid').setView([42.4072, -71.3824], 10);
@@ -236,11 +236,21 @@ function copy_to_clipboard(id) {
   // alert("Copied the text: " + copyText.value);
 }
 
-// function create_tweet(type, name, url) {
-// 	if (type = "violence") {
-// 		tweet_language = "Massachusetts is not immune to police violence and misconduct. We must demand change. #ItHappensHere".replace(/\s/g, '%20')
-// 	}
+function create_tweet(type, name, city, url) {
+	let tweet_language;
+	if (type == "death") {
+		tweet_language = `My community was impacted by police violence. ${city}, Massachusetts is not immune. It's time for state lawmakers to protect people and hold police accountable in Massachusetts.%0D%0A%23PoliceViolenceHappensHere%0D%0ALearn about ${name}'s death here`
 
-// 	url_to_tweet = `http://twitter.com/intent/tweet?text=${tweet_language}%3A&url=http%3A%2F%2F${url}%2F&via=ACLU_Mass`
-// }
+	} else if (type == "violence") {
+		tweet_language = `%23PoliceViolenceHappensHere, in ${city}. It's time for state lawmakers to protect people and hold police accountable in Massachusetts.%0D%0ALearn about police violence in ${city}`
+	} else if (type == "misconduct") {
+		tweet_language = `Unfortunately, bad policing is abundant in Massachusetts. Today I learned about alleged police misconduct ${city}. It's time we put a stop to police abuse in our state. %23PoliceViolenceHappensHere%0D%0A%0D%0ALearn more about this incident`
+	}
+
+	tweet_language = tweet_language.replace(/\s/g, '%20')
+
+	url_to_tweet = `http://twitter.com/intent/tweet?text=${tweet_language}%3A&url=http%3A%2F%2F${url}%2F`
+	console.dir(url_to_tweet)
+	return url_to_tweet
+}
 
