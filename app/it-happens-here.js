@@ -249,7 +249,7 @@ function create_tweet(type, name, city, url) {
 
 	tweet_language = tweet_language.replace(/\s/g, '%20')
 
-	url_to_tweet = `http://twitter.com/intent/tweet?text=${tweet_language}%3A&url=http%3A%2F%2F${url}%2F`
+	url_to_tweet = `http://twitter.com/intent/tweet?text=${tweet_language}%3A&url=http%3A%2F%2F${url}`
 	console.dir(url_to_tweet)
 	return url_to_tweet
 }
