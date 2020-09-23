@@ -202,7 +202,7 @@ function addActions(map) {
 function handle_URL() {
 	if (url_params_present == true) {
 		if (Object.keys(markers).includes(incident_url_param)) {
-			markers[incident_url_param].fire('click')
+			markers[incident_url_param].fire('mouseup')
 		// document.getElementById('elementID').click();
 		} else {
 			// URL parameter does not match marker
