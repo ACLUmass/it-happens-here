@@ -149,6 +149,7 @@ function addMisconductPoints(data) {
           </button>
 
           <div class="collapse" id="collapse${city_no_spaces}${i_entry}">
+            <p><b>Year of Incident:</b> ${city_misconduct_cases[type][entry].year}</p>
             ${city_misconduct_cases[type][entry].description}
             <i>Source: <a id="news-source" target="_blank" href=${city_misconduct_cases[type][entry].source_url}>
               ${city_misconduct_cases[type][entry].source_name}
@@ -229,7 +230,7 @@ function addMisconductPoints(data) {
               document.getElementById(button_id), // HTMLElement
               'mouseup', // String with event names
               function(ev) {  // Handler function
-                document.getElementById(collapse_id).collapse("toggle")
+                $("#" + collapse_id).collapse("toggle")
                  
               }
           );
