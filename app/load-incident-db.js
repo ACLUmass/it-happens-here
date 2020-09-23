@@ -51,11 +51,11 @@ function addPoints(data) {
     let marker_id = data[row].VictimName.replace(/\s/g, '-').toLowerCase()  + '-' + data[row].IncidentDate_Num
     markers[marker_id] = marker;
 
-    marker.on('click', function () {
-      $("#sidebar-killing")[0].style.display = "block";
-      $("#sidebar-misconduct")[0].style.display = "none";
+    marker.on('mouseup', function () {
+      document.getElementById("sidebar-killing").style.display = "block";
+      document.getElementById("sidebar-misconduct").style.display = "none";
 
-      $("#sidebar")[0].style.border = "10px solid #d74d51";
+      document.getElementById("sidebar").style.border = "10px solid #d74d51";
 
       if (data[row].VictimRace == "White") {
         var race = "white";
@@ -101,7 +101,7 @@ function addPoints(data) {
 
       // Define URL for marker and customize "Copy URL" button
       let marker_url = base_url + "?id=" + marker_id;
-      document.getElementById("url-copy-incident").onclick = copy_to_clipboard(marker_url);
+      document.getElementById("url-copy-incident").onmouseup = copy_to_clipboard(marker_url);
 
       let tweet_type
       if (data[row].IncidentType.toLowerCase() == "death") {

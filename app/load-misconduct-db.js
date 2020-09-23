@@ -183,15 +183,13 @@ function addMisconductPoints(data) {
         tweet_type = "misconduct"
       }
 
-      $("#sidebar-killing")[0].style.display = "none";
-      $("#sidebar-misconduct")[0].style.display = "block";
+      document.getElementById("sidebar-killing").style.display = "none";
+      document.getElementById("sidebar-misconduct").style.display = "block";
 
-      $("#sidebar")[0].style.border = `10px solid ${misconduct_color}`;
+      document.getElementById("sidebar").style.border = `10px solid ${misconduct_color}`;
 
-      console.log($("#misconduct-heading"))
-
-      $("#misconduct-heading")[0].innerHTML = watermark;
-      $("#misconduct-heading")[0].style.color = watermark_color;
+      document.getElementById("misconduct-heading").innerHTML = watermark;
+      document.getElementById("misconduct-heading").style.color = watermark_color;
 
       if (city == "Statewide") {
         var city_title = "MA State Police";
@@ -237,7 +235,7 @@ function addMisconductPoints(data) {
               'click', // String with event names
               function(ev) {  // Handler function
                 console.log('clicked!'); 
-                $("#" + collapse_id).collapse("toggle")
+                document.getElementById(collapse_id).collapse("toggle")
                  
               }
           );
