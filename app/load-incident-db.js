@@ -33,11 +33,6 @@ function addPoints(data) {
   // data = data.data;
   let pointGroupLayer = L.layerGroup().addTo(map);
 
-  // Marker radius
-  // Wil be in pixels for circleMarker, metres for circle
-  // Ignore for point
-  let markerRadius = 5;
-
   for (let row = 0; row < data.length; row++) {
     let marker = L.circleMarker([data[row].Latitude, data[row].Longitude], {
         radius: markerRadius, 

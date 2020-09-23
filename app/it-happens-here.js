@@ -4,6 +4,11 @@ const base_url = "data.aclum.org/it-happens-here"
 var map = L.map('mapid').setView([42.4072, -71.3824], 10);
 L.esri.basemapLayer('Gray').addTo(map);
 
+// Marker radius
+  // Wil be in pixels for circleMarker, metres for circle
+  // Ignore for point
+var markerRadius = 7;
+
 // Add link to specific marker with URL parameters
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);

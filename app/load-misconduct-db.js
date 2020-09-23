@@ -30,11 +30,6 @@ function addMisconductPoints(data) {
   // data = data.data;
   let pointGroupLayer = L.layerGroup().addTo(map);
 
-  // Marker radius
-  // Wil be in pixels for circleMarker, metres for circle
-  // Ignore for point
-  let markerRadius = 5;
-
   // Initialize set to hold PD locations
   let PD_locations = [];
 
@@ -166,7 +161,7 @@ function addMisconductPoints(data) {
       }
     }
 
-    marker.on('click', function () {
+    marker.on('mouseup', function () {
 
       let tweet_type
       if (this.options.dvsv_flag == "Sexual Violence") {
@@ -206,7 +201,7 @@ function addMisconductPoints(data) {
 
       // Define URL for marker and customize "Copy URL" button
       let marker_url = base_url + "?id=" + marker_id;
-      document.getElementById("url-copy-misconduct").onclick = copy_to_clipboard(marker_url);
+      document.getElementById("url-copy-misconduct").onmouseup = copy_to_clipboard(marker_url);
 
       let city_to_tweet;
       if (city == "Statewide") {
@@ -232,9 +227,8 @@ function addMisconductPoints(data) {
 
           L.DomEvent.on(
               document.getElementById(button_id), // HTMLElement
-              'click', // String with event names
+              'mouseup', // String with event names
               function(ev) {  // Handler function
-                console.log('clicked!'); 
                 document.getElementById(collapse_id).collapse("toggle")
                  
               }
