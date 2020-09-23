@@ -76,15 +76,24 @@ hr {
 	margin-top: 1rem;
 }
 
-.take-action-btn {
-	background-color: #ef404d;
+.btn-top {
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
-    border-radius: 0px;
+	border-radius: 0px;
     font-weight: 700;
-    margin-right: -3px;
     display: inline-block;
+}
+
+@media only screen and (max-width: 350px) {
+  .btn-top {
+    font-size: .8rem;
+  }
+}
+
+.take-action-btn {
+	background-color: #ef404d;
+    margin-right: -3px;
     color: white !important;	
 }
 
@@ -92,12 +101,6 @@ hr {
 	background-color: #a3dbe3;
 	border-color: #a3dbe3;
 	color: #0055aa !important;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-    border-radius: 0px;
-    font-weight: 700;
-    display: inline-block;
 }
 
 #sidebar {
@@ -257,6 +260,4 @@ hr {
 	background-color: #00acee;
 	border-color: #00acee;
 }
-
-.social .btn-dark 
 
