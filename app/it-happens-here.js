@@ -74,24 +74,31 @@ var info_win =  L.control.window(map,
 	)
 
 // Add polygon of MA to the map
-var MAStyle = {
-    weight: 2,
-    opacity: 1,
-    color: '#a3dbe3',
-    dashArray: '3',
-    fillOpacity: 0.2,
-    interactive: false
-};
+var ma_polygon = L.layerGroup();
 
-var ma_polygon = new L.Shapefile("data/outline25k.zip", {style: MAStyle}).addTo(map);
-ma_polygon.once("data:loaded", function() {
-    map.fitBounds(ma_polygon.getBounds());
-    this.bringToBack();
-})
+function load_massachusetts() {
+	let MAStyle = {
+	    weight: 2,
+	    opacity: 1,
+	    color: '#a3dbe3',
+	    dashArray: '3',
+	    fillOpacity: 0.2,
+	    interactive: false
+	};
+
+	return shp("data/outline25k.zip")
+		.then(geojson => L.geoJSON(geojson, {style: MAStyle}).addTo(map))
+		.then(ma_polygon_layer => {
+			ma_polygon.addLayer(ma_polygon_layer);
+		    map.fitBounds(ma_polygon_layer.getBounds());
+		    ma_polygon_layer.bringToBack();
+		})
+}
 
 // Add button to reset zoom
 L.easyButton('fa-home', function(btn, map){
-    map.fitBounds(ma_polygon.getBounds());
+	let ma_p = map._layers[Object.keys(ma_polygon._layers)[0]]
+    map.fitBounds(ma_p.getBounds());
 }).addTo(map);
 
 // Add button to show info window
@@ -149,12 +156,12 @@ function addActions(map) {
 	        div.innerHTML = `
 	        <a href="https://action.aclu.org/send-message/tell-massachusetts-lawmakers-pass-strong-police-reform-bill?ms_aff=MA&initms_aff=MA&ms=200923_MAP_&initms=200923_MAP_&ms_chan=ptp&initms_chan=ptp"
 	        target="_blank" 
-	           class="btn btn-danger take-action-btn" 
+	           class="btn btn-danger take-action-btn btn-top" 
 	        	role="button" aria-disabled="true">
                     Take Action
                 </a>	
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScmhMIsDd_Ap2GqHHYe6BfBO87D_qIMQ-3n8YJbkUzEdEHjqw/formResponse" 
-            class="btn btn-info submit-incident-btn" 
+            class="btn btn-info submit-incident-btn btn-top" 
         	role="button" aria-disabled="true" target="_blank">
                 Submit Incident 
                 <i class="fas fa-external-link-alt"></i>

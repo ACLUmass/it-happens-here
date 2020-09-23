@@ -17,6 +17,7 @@ fetch(url)
 	.then(json_result => Papa.parse(Papa.unparse(json_result.values), { header: true }))
 	.then(data => addPoints(data.data))
   .then(() => load_misconduct_data())
+  .then(() => load_massachusetts())
   .then(() => {
       // addDates(data);
       loading_win.hide();
