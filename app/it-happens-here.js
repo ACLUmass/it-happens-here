@@ -1,7 +1,10 @@
 const base_url = "data.aclum.org/it-happens-here"
 
 // Initialize Leaflet map
-var map = L.map('mapid').setView([42.4072, -71.3824], 10);
+var map = L.map('mapid', {
+    minZoom: 6,
+    maxZoom: 15
+}).setView([42.4072, -71.3824], 10);
 L.esri.basemapLayer('Gray').addTo(map);
 
 // Marker radius
@@ -95,8 +98,15 @@ function load_massachusetts() {
 		.then(geojson => L.geoJSON(geojson, {style: MAStyle}).addTo(map))
 		.then(ma_polygon_layer => {
 			ma_polygon.addLayer(ma_polygon_layer);
-		    map.fitBounds(ma_polygon_layer.getBounds());
+			// Zoom out to fit map
+		    map.fitBounds(ma_polygon_layer.getBounds())
+		    // Don't allow scrolling outsie here
+		    map.once("moveend zoomend", function()  {
+		    		map.setMaxBounds(map.getBounds());
+		    	});
+		    // Make sure map is behind dots
 		    ma_polygon_layer.bringToBack();
+
 		})
 }
 
