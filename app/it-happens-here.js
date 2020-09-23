@@ -51,7 +51,7 @@ var info_win =  L.control.window(map,
     against police violence and misconduct across Massachusetts, visit the homepage for our <a href="https://www.aclum.org/en/police-violence-happens-here-week-action" target="_blank">Week of Action</a>.</p>
     <p style="margin-bottom: 0px;">To learn more about policing in Massachusetts and nationally, we invite you to explore the following projects and organizations:</p>
     <ul>
-        <li><a href="http://masspolicereform.org/" target="_blank">Mass Police Reform</a></li>
+    	<li><a href="https://shotbypolice.blackstonian.org/" target="_blank">Shot By Police - Black Bostonian</a></li>
         <li><a href="https://www.wokewindows.org/" target="_blank">Woke Windows</a></li>
         <li><a href="https://mappingpoliceviolence.org/" target="_blank">Mapping Police Violence</a></li>
     </ul>
