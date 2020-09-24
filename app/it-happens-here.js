@@ -100,10 +100,11 @@ function load_massachusetts() {
 			ma_polygon.addLayer(ma_polygon_layer);
 			// Zoom out to fit map
 		    map.fitBounds(ma_polygon_layer.getBounds())
-		    // Don't allow scrolling outsie here
-		    map.once("moveend zoomend", function()  {
-		    		map.setMaxBounds(map.getBounds());
-		    	});
+		    // Set limited bounds
+		    map.setMaxBounds([
+			    [39.675021, -76.040826],
+			    [44.245591, -67.256427]
+			]);
 		    // Make sure map is behind dots
 		    ma_polygon_layer.bringToBack();
 
