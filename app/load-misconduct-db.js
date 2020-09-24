@@ -215,7 +215,7 @@ function addMisconductPoints(data) {
         city_to_tweet = "in " + city
       }
 
-      document.getElementById("url-tweet-incident").href = create_tweet(tweet_type, "", city_to_tweet, marker_url)
+      document.getElementById("url-tweet-misconduct").href = create_tweet(tweet_type, "", city_to_tweet, marker_url)
 
       // Re-add the call to toggle the bootstrap collapse when the button is clicked
       for (i_cityentry in city_entries) {
