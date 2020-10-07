@@ -62,6 +62,7 @@ var info_win =  L.control.window(map,
     	<li><a href="https://shotbypolice.blackstonian.org/" target="_blank">Shot By Police - Black Bostonian</a></li>
         <li><a href="https://www.wokewindows.org/" target="_blank">Woke Windows</a></li>
         <li><a href="https://mappingpoliceviolence.org/" target="_blank">Mapping Police Violence</a></li>
+        <li><a href="http://projects.wgbhnews.org/police-involved-deaths/" target="_blank">Police-Involved Deaths - WGBH</a></li>
     </ul>
     
     <p>This map is a resource for the press, activists, and the public. Far from exhaustive, 
