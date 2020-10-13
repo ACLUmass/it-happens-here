@@ -54,7 +54,6 @@ function addMisconductPoints(data) {
     }
 
     if (typeof description == "undefined") {
-      console.log("description", description, typeof description == "undefined")
       description = "<em>No details available.</em>"
     }
 

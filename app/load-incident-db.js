@@ -72,9 +72,6 @@ function addPoints(data) {
         gender = " person"
       }
 
-      console.log(data[row].VictimAge.toLowerCase().trim(), data[row].VictimAge.toLowerCase().trim() == "unknown")
-
-
       if (data[row].VictimAge.toLowerCase().trim() == "unknown") {
         var demographics = race + gender + " of unknown age"   
         demographics = demographics.trim()     
