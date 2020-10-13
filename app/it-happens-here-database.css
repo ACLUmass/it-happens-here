@@ -1,0 +1,121 @@
+/* GT America Condensed Regular */
+@font-face {
+  font-family:'gtamcond';
+  src: url("fonts/gtamerica/GT-America-Condensed-Regular.woff2") format('woff2');
+  font-weight:400;
+}
+
+/* GT America Condensed Bold */
+@font-face {
+  font-family:'gtamcond';
+  src: url("fonts/gtamerica/GT-America-Condensed-Bold.woff2") format('woff2');
+  font-weight:600;
+}
+
+/* GT America Regular */
+@font-face {
+  font-family:'gtam';
+  src: url("fonts/gtamerica/GT-America-Standard-Regular.woff2") format('woff2');
+  font-weight:400;
+}
+
+/* GT America Bold */
+@font-face {
+  font-family:'gtam';
+  src: url("fonts/gtamerica/GT-America-Standard-Bold.woff2") format('woff2');
+  font-weight:600;
+}
+
+body {
+	font-family: gtam;
+	background-color: #e6f0f2;
+	color: black;
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+}
+
+html {
+	height: 100%;
+}
+
+h1, h2, h3 {
+	/*font-family: GT America Condensed;*/
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+#ihh-logo {
+	width: 50%;
+}
+
+#header {
+	text-align: center;
+    background-color: #cee3e7;
+    margin-top: 0px;
+    color: white;
+}
+
+#content {
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.card {
+	margin: 1rem;
+}
+
+.card-header {
+	background-color: rgb(215, 77, 81);
+    text-align: right;
+    text-transform: uppercase;
+    font-family: 'gtam';
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 0px;
+    padding-right: 1rem;
+    color: white;
+}
+
+.card-title {
+	font-family: 'gtamcond';
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+.card-text {
+	font-size: .9rem;
+}
+
+.card-subtitle {
+	font-style: italic;
+	font-size: .9rem;
+}
+
+.btn {
+	margin-left: auto;
+	display: block;
+	border-radius: 0px;
+    font-weight: 700;
+    display: inline-block;
+	/*background-color: #00acee;*/
+	/*border-color: #00acee;*/
+    color: white !important;
+    margin-top: -30px;
+    font-size: .9rem;
+}
+
+
+.incident-description {
+	margin-top: 1rem;
+}
+
+.cards-container .col-md-6 {
+	padding:0px;
+}
