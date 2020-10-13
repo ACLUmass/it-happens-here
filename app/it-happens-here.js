@@ -81,7 +81,7 @@ var info_win =  L.control.window(map,
 
 	 	 <p>Interested programmers can view the source code for this map, written in Javascript, on <a href="https://github.com/ACLUmass/it-happens-here" target="_blank">GitHub</a>.</p>
     
-	 	 Please contact <a href="mailto:lchambers@aclum.org">lchambers@aclum.org</a> with questions, or <a href="mailto:klagreca@aclum.org">klagreca@aclum.org</a> with media inquiries.
+	 	 Please contact <a href="mailto:lchambers@aclum.org">lchambers@aclum.org</a> with questions or updates to information on this site, or <a href="mailto:klagreca@aclum.org">klagreca@aclum.org</a> with media inquiries.
 	 	 `,
 	 className: "info-window",
 	 position: "top-left"}
