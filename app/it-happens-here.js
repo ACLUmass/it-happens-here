@@ -138,7 +138,7 @@ map.addControl(sidebar);
 
 sidebar.on('hidden', function () {
     map.scrollWheelZoom.enable();
-
+	updateSelectedMarker(null);
 });
 
 // Add custom control with ACLUM logo

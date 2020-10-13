@@ -312,22 +312,22 @@ function updateSelectedMarker (layer) {
     // Change color!!
 
     // If it's the first time...
-    if (selected_marker.url == null) {
-      // Update newly selected marker info
-      selected_marker.url = layer.options.url
-      selected_marker.color = layer.options.color
-
-    // If you've already selected something before...
-    } else {
+    if (selected_marker.url != null) {
       // Turn old marker back to normal
       markers[selected_marker.url].setStyle({fillColor: selected_marker.color});
-
-      // Update selected marker info
-      selected_marker.url = layer.options.url
-      selected_marker.color = layer.options.color
     }
 
-    markers[layer.options.url].setStyle({fillColor: '#fdff38'}); // Neon green 
-    markers[layer.options.url].bringToFront();
+    // Update selected marker info
+    if (layer != null) {
+      selected_marker.url = layer.options.url
+      selected_marker.color = layer.options.color
+
+      markers[layer.options.url].setStyle({fillColor: '#fdff38'}); // Neon green 
+      markers[layer.options.url].bringToFront();
+    } else {
+      selected_marker.url = null
+      selected_marker.color = null
+    }
+    
 }
 
