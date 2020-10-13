@@ -9,14 +9,13 @@ var url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values
 var sheetName_misconduct = 'Misconduct'
 var url_misconduct = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${sheetName_misconduct}?key=${apiKey}`;
 
-function load_misconduct_data() {
+function load_misconduct_data(incidentPointsLayer) {
   return fetch(url_misconduct)
   	.then(response => response.json())
   	.then(json_result => Papa.parse(Papa.unparse(json_result.values), { header: true }))
   	.then(data => {
     		var data = data.data;
-        console.log(data);
-        addMisconductPoints(data);
+        addMisconductPoints(data, incidentPointsLayer);
       });
   }
 
@@ -24,11 +23,9 @@ function load_misconduct_data() {
 Add points from google sheet to Leaflet map
 Thank you, https://github.com/carderne/leaflet-gsheets/blob/master/main.js
 */
-function addMisconductPoints(data) {
+function addMisconductPoints(data, incidentPointsLayer) {
 
-  console.log("markers within addMisconductPoints", markers)
-  // data = data.data;
-  let pointGroupLayer = L.layerGroup().addTo(map);
+  var misconductPointsLayer = L.layerGroup().addTo(map);
 
   // Initialize set to hold PD locations
   let PD_locations = [];
@@ -97,9 +94,13 @@ function addMisconductPoints(data) {
 
     if (dvsv_flag == "Sexual Violence") {
       var misconduct_color = "#d74d51"
+      var misconduct_type = "Violence"
     } else {
       var misconduct_color = "#0055aa"
+      var misconduct_type = "Misconduct"
     }
+
+    let marker_id = city.toLowerCase().replace(/\s/g, '-');
 
     let marker = L.circleMarker([lat, lng], {
       radius: markerRadius, 
@@ -107,11 +108,13 @@ function addMisconductPoints(data) {
       fillOpacity: 0.6,
       color: misconduct_color,
       city: city,
-      dvsv_flag: dvsv_flag
+      dvsv_flag: dvsv_flag,
+      title: city + " " + misconduct_type,
+      type: misconduct_type,
+      url: marker_id
     });
-    marker.addTo(pointGroupLayer);
+    marker.addTo(misconductPointsLayer);
 
-    let marker_id = city.toLowerCase().replace(/\s/g, '-');
     markers[marker_id] = marker;
 
     let city_flag_key = city + "-" + dvsv_flag.replace(/\s/g, '-').toLowerCase()
@@ -240,14 +243,91 @@ function addMisconductPoints(data) {
 
       // Disable scroll zooming to not mess up scrolling inside sidebar
       map.scrollWheelZoom.disable();
+
+      // Update the color
+      updateSelectedMarker(this);
       
     });
 
-    
-
   }
 
-  console.log("markers at the end of addMisconductPoints", markers)
+  addSearchFeature(incidentPointsLayer, misconductPointsLayer);
 
+}
+
+function addSearchFeature(incidentPointsLayer, misconductPointsLayer) {
+  // Layer to hold both incidents and misconduct
+  var searchLayer = L.layerGroup([
+    incidentPointsLayer,
+    misconductPointsLayer
+  ])
+  .addTo(map);
+
+  // var searchLayer = L.layerGroup().addTo(map);
+  //... adding data in searchLayer ...
+  new L.Control.Search({
+    layer: searchLayer,
+    initial: false,
+    autoCollapse: true,
+    marker: false,
+    buildTip: function(text, val) {
+      // Determine what tip to show based on incident/event type
+      var type = val.layer.options.type;
+      if (type == "Incident") {
+        span_class = "fas fa-user searchIncident";
+      } else {
+        span_class = "dot dot" + type;
+      }
+
+      // Put the requisite icon before the description
+      return '<a><span class="' + span_class + '"></span>' + text + '</a>';
+    }
+  }).on('search:locationfound', function (data) {
+
+   // Simulate click!
+    markers[data.layer.options.url].fire('mouseup')  
+
+  }).addTo(map);
+
+  // Replace bad search button formatting
+  let search_button = document.getElementsByClassName("search-button")[0];
+
+  fa_span_search = document.createElement("span");
+  fa_span_search.className = "fa fa-search";
+
+  search_button.appendChild(fa_span_search);
+
+  // Replace bad cancel button formatting
+  let cancel_button = document.getElementsByClassName("search-cancel")[0];
+  cancel_span = cancel_button.firstElementChild
+
+  fa_span_cancel = document.createElement("span");
+  fa_span_cancel.className = "fa fa-times";
+
+  cancel_button.replaceChild(fa_span_cancel, cancel_span);
+}
+
+function updateSelectedMarker (layer) {
+
+    // Change color!!
+
+    // If it's the first time...
+    if (selected_marker.url == null) {
+      // Update newly selected marker info
+      selected_marker.url = layer.options.url
+      selected_marker.color = layer.options.color
+
+    // If you've already selected something before...
+    } else {
+      // Turn old marker back to normal
+      markers[selected_marker.url].setStyle({fillColor: selected_marker.color});
+
+      // Update selected marker info
+      selected_marker.url = layer.options.url
+      selected_marker.color = layer.options.color
+    }
+
+    markers[layer.options.url].setStyle({fillColor: '#fdff38'}); // Neon green 
+    markers[layer.options.url].bringToFront();
 }
 

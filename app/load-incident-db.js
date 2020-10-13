@@ -16,7 +16,7 @@ fetch(url)
 	.then(response => response.json())
 	.then(json_result => Papa.parse(Papa.unparse(json_result.values), { header: true }))
 	.then(data => addPoints(data.data))
-  .then(() => load_misconduct_data())
+  .then(incidentPointsLayer => load_misconduct_data(incidentPointsLayer))
   .then(() => load_massachusetts())
   .then(() => {
       // addDates(data);
@@ -31,19 +31,26 @@ Thank you, https://github.com/carderne/leaflet-gsheets/blob/master/main.js
 */
 function addPoints(data) {
   // data = data.data;
-  let pointGroupLayer = L.layerGroup().addTo(map);
+  var incidentPointsLayer = L.layerGroup().addTo(map);
+
+  // Layer to hold both incidents and misconduct
+  let searchLayer = L.layerGroup().addTo(map);
 
   for (let row = 0; row < data.length; row++) {
+    let marker_id = data[row].VictimName.replace(/\s/g, '-').toLowerCase()  + '-' + data[row].IncidentDate_Num
+    
     let marker = L.circleMarker([data[row].Latitude, data[row].Longitude], {
         radius: markerRadius, 
         stroke: false,
         fillOpacity: 0.6,
         color: "#ef404d",
-        time: data[row].IncidentDate
+        time: data[row].IncidentDate,
+        title: data[row].VictimName + " [" + data[row].City + "]",
+        type: "Incident",
+        url: marker_id
       });
-    marker.addTo(pointGroupLayer);
+    marker.addTo(incidentPointsLayer);
 
-    let marker_id = data[row].VictimName.replace(/\s/g, '-').toLowerCase()  + '-' + data[row].IncidentDate_Num
     markers[marker_id] = marker;
 
     marker.on('mouseup', function () {
@@ -123,8 +130,13 @@ function addPoints(data) {
 
       // Disable scroll zooming to not mess up scrolling inside sidebar
       map.scrollWheelZoom.disable();
+
+      // Update the color
+      updateSelectedMarker(this);
       
     });
   }
+
+  return incidentPointsLayer
 }
 

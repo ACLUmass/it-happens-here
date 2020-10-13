@@ -12,6 +12,11 @@ L.esri.basemapLayer('Gray').addTo(map);
   // Ignore for point
 var markerRadius = 7;
 
+var selected_marker = {
+	url: null,
+	color: null,
+};
+
 // Add link to specific marker with URL parameters
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
