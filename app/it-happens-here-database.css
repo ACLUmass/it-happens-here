@@ -12,6 +12,14 @@
   font-weight:600;
 }
 
+
+/* GT America Compressed Bold */
+@font-face {
+  font-family:'gtamcomp';
+  src: url("fonts/gtamerica/GT-America-Compressed-Bold.otf") format('opentype');
+  font-weight:600;
+}
+
 /* GT America Regular */
 @font-face {
   font-family:'gtam';
@@ -50,6 +58,37 @@ h1 {
 	margin-bottom: 0px;
 }
 
+.navbar {
+	background-color: #0055aa !important;
+	height: 60px;
+}
+
+.navbar-collapse.show {
+    padding: 1rem;
+    background-color: rgb(0, 85, 170);
+}
+
+#nav_photo {
+  background-image: url("img/blue_photo.png"); /* The image used */
+  background-color: #b0dbe3; /* Used if the image is unavailable */
+  height: 20px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.nav-link {
+	font-weight: 600;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-family: 'gtamcomp';
+    color: #0055aa;
+    text-shadow: 2px 2px #b0dbe3;
+    line-height: 1;
+}
+
 #ihh-logo {
 	width: 50%;
 }
@@ -64,10 +103,13 @@ h1 {
 #content {
 	margin-left: 10%;
 	margin-right: 10%;
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+	min-height: calc(100% - 225px);
 }
 
 .card {
-	margin: 1rem;
+	margin-bottom: 1rem;
 }
 
 .card-header {
@@ -76,7 +118,7 @@ h1 {
     text-transform: uppercase;
     font-family: 'gtam';
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.4rem;
     padding: 0px;
     padding-right: 1rem;
     color: white;
@@ -118,4 +160,28 @@ h1 {
 
 .cards-container .col-md-6 {
 	padding:0px;
+}
+
+#filter_button {
+	margin: .5px;
+    font-size: 1rem;
+    background-color: #0055aa;
+    border-color: #0055aa;
+}
+
+.search-card {
+	background-color: rgba(255, 255, 255, .5);
+    padding: 1rem;
+    margin: .5rem;
+}
+
+#footer {
+	background-color: rgba(255, 255, 255, .5);
+    margin-bottom: 0px;
+    font-size: 0.8rem;
+    padding: 1rem;
+}
+
+#footer p {
+	margin-bottom: 0px;
 }

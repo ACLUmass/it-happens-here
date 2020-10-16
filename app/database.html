@@ -2,15 +2,12 @@
 <html>
 
 <head>
-	<title>Police Violence Happens Here - ACLU of Massachusetts</title>
-
-	<!-- Add favicon -->
-	<link rel="shortcut icon" href="https://data.aclum.org/sjc-12926-tracker/favicon.ico">
-	<link rel="icon" type="image/png" sizes="512x512" href="https://data.aclum.org/sjc-12926-tracker/favicon.png">
-
+    <title>Police Violence Happens Here - ACLU of Massachusetts</title>
+    <!-- Add favicon -->
+    <link rel="shortcut icon" href="https://data.aclum.org/sjc-12926-tracker/favicon.ico">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://data.aclum.org/sjc-12926-tracker/favicon.png">
     <!-- Very important to make mobile work right!! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
     <!-- Load Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -22,121 +19,138 @@
     <script src="https://kit.fontawesome.com/7fb5d02cd4.js" crossorigin="anonymous"></script>
     <!-- Load custom CSS -->
     <link rel="stylesheet" href="it-happens-here-database.css" />
+    <link rel="stylesheet" href="sticky-footer.css" />
 </head>
 
-<div id = "header">
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand">
+            <img src="img/white_logo.png" alt="ACLU of Massachusetts logo" height="30px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <span class="navbar-text d-none d-md-block">
+                <em>An initiative by the <a href="https://www.aclum.org/" target="_blank">ACLU of Massachusetts</a></em>
+            </span>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="https://data.aclum.org/it-happens-here/">View Map</a>
+                <a class="nav-item nav-link" href="https://docs.google.com/forms/d/e/1FAIpQLScmhMIsDd_Ap2GqHHYe6BfBO87D_qIMQ-3n8YJbkUzEdEHjqw/viewform" target="_blank">Submit Incident</a>
+                <a class="nav-item nav-link" href="https://action.aclu.org/send-message/tell-massachusetts-lawmakers-pass-strong-police-reform-bill?ms_aff=MA&initms_aff=MA&ms=200923_MAP_&initms=200923_MAP_&ms_chan=ptp&initms_chan=ptp" target="_blank">Take Action</a>
+            </div>
+        </div>
+    </nav>
+    <div id="nav_photo"></div>
+    <div id="content">
+        <h2 class="title">Police Violence Happens Here</h2>
+        <p>Massachusetts is not immune to police violence and misconduct - and we must demand change. Right now, legislators in Massachusetts have the unprecedented opportunity to end qualified immunity, impose real restrictions on use of force, and ban police use of face surveillance technology. Police violence happens here: help us demand an end to it in Massachusetts.</p>
+        This database shows incidents of alleged police violence (red) and alleged misconduct (blue) that occurred in Massachusetts since 2000. Descriptions are drawn from contemporaneous sources. This is not an exhaustive list, and locations are not meant to be exact.
+        <br><br>
+        <div class="card search-card">
+            <h5 class="card-title" style="font-size: 1.5rem;">Search by:</h5>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Type of Incident</span>
+                        </div>
+                        <select id="incident_type" name="incident_type" class="form-control" onchange="incident_type_change(this.value);">
+                            <option value="all">All</option>
+                            <option value="death">Death</option>
+                            <option value="injury">Injury</option>
+                            <option value="violence">Other Violence</option>
+                            <option value="misconduct">Misconduct</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6" id="misconduct_type_div" style="display:none">
+                    <div class="input-group mb-2">
+                        <div id="misconduct_type_label" class="input-group-prepend">
+                            <span class="input-group-text">Type of Misconduct</span>
+                        </div>
+                        <select id="misconduct_type" name="misconduct_type" class="form-control">
+                            <option value="all">All</option>
+                            <option value="racism">Racism</option>
+                            <option value="financial-fraud,-waste,-and-abuse">Financial Fraud, Waste, and Abuse</option>
+                            <option value="corruption">Corruption</option>
+                            <option value="drunk-driving">Drunk Driving</option>
+                            <option value="unconstitutional-policing">Unconstitutional Policing</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6" id="violence_type_div" style="display:none">
+                    <div class="input-group mb-2">
+                        <div id="violence_type_label" class="input-group-prepend">
+                            <span class="input-group-text">Type of Violence</span>
+                        </div>
+                        <select id="violence_type" name="violence_type" class="form-control">
+                            <option value="all">All</option>
+                            <option value="domestic-violence">Domestic Violence</option>
+                            <option value="sexual-violence">Sexual Violence</option>
+                            <option value="off-duty-violence">Off Duty Violence</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-8">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Location</span>
+                        </div>
+                        <select class="form-control mr-3" id="city_select">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Year</span>
+                        </div>
+                        <select class="form-control" id="year_select">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-12">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Keyword</span>
+                        </div>
+                        <input id="keyword_search_box" type="text" class="form-control" placeholder="e.g. victim name, officer name, race" aria-label="Subject & Body">
+                    </div>
+                </div>
+            </div>
 
-<img id="ihh-logo" src="img/ihh_logo.png" alt="Police Violence Happens Here">
+            <div align="center">
+                <a onclick="filter_incidents();" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true" id="filter_button">
+                    Filter
+                </a>
+            </div>
+        </div>
+        <hr>
+        <p align="right">Showing <a id="n_incidents_showing">...</a>/<span id="total_n_incidents">...</span> incidents</p>
+        <div class="cards-container row"></div>
+        <a id="no_incidents_msg" style='display: none; text-align: center; font-style: italic;'>
+        	No incidents match the search criteria.
+    	</a>
+    </div>
 
-</div>
-
-<div id="content">
-
-	<p style="text-align:center"><em>An initiative by the <a href="aclum.org" target="_blank">ACLU of Massachusetts</a></em></p>
-
-	<p>Massachusetts is not immune to police violence and misconduct - and we must demand change. Right now, legislators in Massachusetts have the unprecedented opportunity to end qualified immunity, impose real restrictions on use of force, and ban police use of face surveillance technology. Police violence happens here: help us demand an end to it in Massachusetts.</p>
-
-	This database shows incidents of alleged police violence (red) and alleged misconduct 
-		     	(blue) that occurred in Massachusetts since 2000. Descriptions are drawn 
-		     	from contemporaneous sources. This is not an exhaustive list, and locations 
-		     	are not meant to be exact.
-
-	<div class="cards-container row"></div>
-
-</div>
-
+    <div id="footer">
+        <div align="center">
+            <a href="https://www.aclum.org/" target="_blank">
+                <img src="img/Logo_CMYK_Massachusetts_Massachusetts.png" height="50px" style="display: inline; margin: 10px;">
+            </a>
+            <a href="https://www.data.aclum.org/" target="_blank">
+                <img src="img/D4J-logo-transparent.png" height="50px" style="display: inline; margin: 10px;">
+            </a>
+        </div>
+        <p align="center" style="opacity: 0.6;">Please contact lchambers@aclum.org with questions or updates to information on this site, or klagreca@aclum.org with media inquiries.</p>
+    </div>
+</body>
 <script type='text/javascript' src='apikey.js'></script>
-<script>
-
-
-
-	let SHEET_ID = '1WgKitw1ggr9VO9Wg_K50G7t4L-uP_dr3vi7drUcPPbU'; // Get this from the main sheet URL (not the copied Publish URL with '2PACX' in it).
-	let API_KEY = google_sheets_api_key;
-	var spreadsheetId = SHEET_ID
-	var sheetName = 'Incidents'
-	var apiKey = API_KEY
-	var url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${sheetName}?key=${apiKey}`;
-
-	fetch(url)
-		.then(response => response.json())
-		.then(json_result => Papa.parse(Papa.unparse(json_result.values), { header: true }))
-		.then(data => {
-			// console.log(data)
-			createCards(data)
-		})
-
-	function createCards(data) {
-
-		card_container = document.getElementsByClassName("cards-container")[0]
-
-		for (incident in data.data) {
-			console.log(data.data[incident])
-			incident_data = data.data[incident]
-
-			let id = incident_data.VictimName.replace(/\s/g, '-').toLowerCase()  + '-' + incident_data.IncidentDate_Num
-			incident_url = "https://data.aclum.org/it-happens-here/?id=" + id
-
-			if (incident_data.VictimRace == "White") {
-		        var race = "white";
-		      } else if (incident_data.VictimRace == "Unknown") {
-		        var race = "";
-		      } else {
-		        var race = incident_data.VictimRace;
-		      }
-
-		      if (incident_data.VictimGender == "Male" & incident_data.VictimAge >= 18) {
-		        gender = " man"
-		      } else if (incident_data.VictimGender == "Male" & incident_data.VictimAge < 18) {
-		         gender = " boy"
-		      } else if (incident_data.VictimGender == "Female" & incident_data.VictimAge >= 18) {
-		         gender = " woman"
-		      } else if (incident_data.VictimGender == "Female" & incident_data.VictimAge < 18) {
-		        gender = " girl"
-		      } else {
-		        gender = " person"
-		      }
-
-		      if (incident_data.VictimAge.toLowerCase().trim() == "unknown") {
-		        var demographics = race + gender + " of unknown age"   
-		        demographics = demographics.trim()     
-		        demographics = demographics.charAt(0).toUpperCase() + demographics.slice(1);
-		      } else {
-		        var demographics = incident_data.VictimAge + "-year-old " + race + gender
-		      }
-
-			let card_div = document.createElement("div"); 
-			card_div.className = "col-md-6"
-        	card_div.innerHTML = `
-		        	<div class="card">
-		        	<div class="card-header">
-					    ${incident_data.IncidentType}
-					  </div>
-				  <div class="card-body">
-				    <h5 class="card-title">${incident_data.VictimName}</h5>
-				    <h6 class="card-subtitle mb-2 text-muted">${demographics}</h6>
-
-				  <div class="card-text">
-			    	        <div><b>Date of Incident:</b> ${incident_data.IncidentDate}</div>
-			    	        <div><b>Location:</b> ${incident_data.City}</div>
-			    	        <div><b>Police Department:</b> ${incident_data.PoliceDept}</div>
-			    	        <div><b>Officer(s) Involved:</b> ${incident_data.OfficerName}</div>
-			            <p class="incident-description">
-			            	${incident_data.Description}
-			            </p>
-			            <i>Source: <a id="news-source" target="_blank" href="${incident_data.ArticleURL}">${incident_data.ArticleSource}</a></i>
-			            </div>
-
-			            <div style="text-align:right;"><a class="btn btn-dark" href="${incident_url}" target="blank" role="button">See on map</a></div>
-				  </div>
-				  </div>
-				`
-
-			card_container.appendChild(card_div)
-
-		}
-
-	}
-
-</script>
-
+<script type='text/javascript' src='sort_filter_database.js'></script>
+<script type='text/javascript' src='database.js'></script>
 </html>
