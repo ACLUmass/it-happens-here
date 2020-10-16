@@ -6,7 +6,8 @@
 - Bootstrap
 - Papa parse
 - leaflet-sidebar
-- leaflet.shapefile
+- shapefile.js
 - Font Awesome
 - Leaflet.EasyButton
 - leaflet-control-window
+- leaflet-search
