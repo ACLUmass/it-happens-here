@@ -296,3 +296,8 @@ hr {
 	color: black;
     text-align: center;
 }
+
+#intro-description a {
+    color: #b0dbe2;
+    font-weight: 800;
+}

@@ -40,7 +40,8 @@ var intro_win =  L.control.window(map,
 	     	This map shows incidents of alleged police violence (red dots) and alleged misconduct 
 	     	(blue dots) that occurred in Massachusetts since 2000. Descriptions are drawn 
 	     	from contemporaneous sources. This is not an exhaustive list, and locations 
-	     	are not meant to be exact.
+	     	are not meant to be exact. All incidents can also be viewed in our interactive 
+	     	<a href="database.html" target="_blank">database</a>.
      	</p>`,
 	 className: "intro-window",
 	 position: "top-left",
@@ -58,6 +59,8 @@ var info_win =  L.control.window(map,
 	 	 <p><em>An initiative by the <a href="aclum.org" target="_blank">ACLU of Massachusetts</a></em></p>
 
 	 	 <p>Massachusetts is not immune to police violence and misconduct - and we must demand change. Right now, legislators in Massachusetts have the unprecedented opportunity to end qualified immunity, impose real restrictions on use of force, and ban police use of face surveillance technology. Police violence happens here: help us demand an end to it in Massachusetts.</p>
+
+	 	 <p style="text-align: center; font-weight: 800;">All incidents shown on the map are also catalogued in our interactive <a href="database.html" target="_blank">database</a>.</p>
     
     <p> To <a href="https://action.aclu.org/send-message/tell-massachusetts-lawmakers-pass-strong-police-reform-bill?ms_aff=MA&initms_aff=MA&ms=200923_MAP_&initms=200923_MAP_&ms_chan=ptp&initms_chan=ptp">
     take action</a> 
@@ -121,12 +124,17 @@ function load_massachusetts() {
 L.easyButton('fa-home', function(btn, map){
 	let ma_p = map._layers[Object.keys(ma_polygon._layers)[0]]
     map.fitBounds(ma_p.getBounds());
-}).addTo(map);
+}, "Reset Zoom").addTo(map);
 
 // Add button to show info window
 L.easyButton('fa-info', function(btn, map){
     info_win.show()
-}).addTo(map);
+}, "Learn more").addTo(map);
+
+// Add button to view database page
+L.easyButton('fa-table', function(btn, map){
+    window.open("database.html")
+}, "View database").addTo(map);
 
 
 // Add sidebar
