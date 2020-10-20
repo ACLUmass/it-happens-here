@@ -301,3 +301,7 @@ hr {
     color: #b0dbe2;
     font-weight: 800;
 }
+
+.leaflet-bottom.leaflet-left {
+	z-index: 800;
+}
