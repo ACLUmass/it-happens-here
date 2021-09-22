@@ -103,7 +103,11 @@ function load_massachusetts() {
 	    interactive: false
 	};
 
-	return shp("data/OUTLINE25K_min.zip")
+	// Bug fix on 9/21/21 from:
+	// https://github.com/calvinmetcalf/shapefile-js/issues/165#issuecomment-877212485
+	return fetch("data/OUTLINE25K_min.zip")
+		.then(res => res.arrayBuffer())
+		.then(myshape => shp(myshape))
 		.then(geojson => L.geoJSON(geojson, {style: MAStyle}).addTo(map))
 		.then(ma_polygon_layer => {
 			ma_polygon.addLayer(ma_polygon_layer);
