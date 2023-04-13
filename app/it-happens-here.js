@@ -187,14 +187,13 @@ function addActions(map) {
 	        let div = L.DomUtil.create('div');
 	        div.classList.add("take-action");
 
-	        div.innerHTML = `
-	        <a href="https://action.aclu.org/send-message/tell-massachusetts-lawmakers-pass-strong-police-reform-bill?ms_aff=MA&initms_aff=MA&ms=200923_MAP_&initms=200923_MAP_&ms_chan=ptp&initms_chan=ptp"
-	        target="_blank" 
-	           class="btn btn-danger take-action-btn btn-top" 
-	        	role="button" aria-disabled="true">
-                    Take Action
-                </a>	
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScmhMIsDd_Ap2GqHHYe6BfBO87D_qIMQ-3n8YJbkUzEdEHjqw/formResponse" 
+	        // `<a href="https://action.aclu.org/send-message/tell-massachusetts-lawmakers-pass-strong-police-reform-bill?ms_aff=MA&initms_aff=MA&ms=200923_MAP_&initms=200923_MAP_&ms_chan=ptp&initms_chan=ptp"
+	        // target="_blank" 
+	        //    class="btn btn-danger take-action-btn btn-top" 
+	        // 	role="button" aria-disabled="true">
+	         //            Take Action
+	         //        </a>`		
+            div.innerHTML = `<a href="https://docs.google.com/forms/d/e/1FAIpQLScmhMIsDd_Ap2GqHHYe6BfBO87D_qIMQ-3n8YJbkUzEdEHjqw/formResponse" 
             class="btn btn-info submit-incident-btn btn-top" 
         	role="button" aria-disabled="true" target="_blank">
                 Submit Incident 
